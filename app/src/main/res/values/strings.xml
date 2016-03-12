@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">ChatOut</string>
+    <string name="title_activity_main">ChatOut</string>
+
+    　　
+    <string-array name="district">
+        <item>Central and Western</item>
+        <item>Eastern</item>
+        <item>Islands</item>
+        <item>Kowloon</item>
+        <item>Kwai Tsing</item>
+        <item>Kwun Tong</item>
+        <item>North</item>
+        <item>Sai Kung</item>
+        <item>Sha Tin</item>
+        <item>Sham Shui Po</item>
+        <item>Southern</item>
+        <item>Tai Po</item>
+        <item>Tsuen Wan</item>
+        <item>Tuen Mun</item>
+        <item>Wan Chai</item>
+        <item>Wong Tai Sin</item>
+        <item>Yau Tsim Mong</item>
+        <item>Yuen Long</item>
+        　　
+    </string-array>
+    <string-array name="martial">
+        <item>Single</item>
+        <item>Married</item>
+        <item>Other</item>
+    </string-array>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_setting">SettingActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_map_click">mapClick</string>
+    <string name="title_activity_event__join">Event_Join</string>
+</resources>

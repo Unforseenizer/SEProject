@@ -1,0 +1,200 @@
+package com.example.desktop.project;
+
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TimePicker;
+import android.widget.Toast;
+
+public class Fragment_category_create extends Fragment implements TimePickerFragment.OnHeadlineSelectedListener, DatePickerDialog.OnDateSetListener {
+    EditText eventName, eventDescription;
+    Button eventLocation, EventSubmit, delete, update, datepick, timepick;
+    Double Lat;
+    Double Lng;
+    AlertDialog.Builder builder;
+    Event Editdump;
+    int year, month, day, hour, min;
+    View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case (R.id.time_click):
+                    TimePickerFragment newFragment = new TimePickerFragment();
+                    newFragment.show(getFragmentManager(), "timePicker");
+
+                    break;
+                case (R.id.date_click):
+                    DatePickerFragment newFragment2 = new DatePickerFragment();
+                    newFragment2.setTargetFragment(Fragment_category_create.this, 2);
+                    newFragment2.show(getFragmentManager(), "datePicker");
+                    break;
+                case (R.id.create_location):
+                    Intent mapClick = new Intent(getContext(), mapClick.class);
+                    if (Lat != null && Lng != null) {
+                        mapClick.putExtra("savedLat", Lat);
+                        mapClick.putExtra("savedLng", Lng);
+                    }
+                    mapClick.putExtra("isEdit", 0);
+                    startActivityForResult(mapClick, 1);
+                    break;
+                case (R.id.create_submit):
+                    dialogBuild();
+                    builder.create().show();
+                    break;
+            }
+        }
+    };
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_category_create, null, false);
+        Log.e("frag4", "onCreateView");
+
+        eventName = (EditText) root.findViewById(R.id.create_eventname);
+        eventDescription = (EditText) root.findViewById(R.id.create_eventdesc);
+        eventLocation = (Button) root.findViewById(R.id.create_location);
+        EventSubmit = (Button) root.findViewById(R.id.create_submit);
+        datepick = (Button) root.findViewById(R.id.date_click);
+        timepick = (Button) root.findViewById(R.id.time_click);
+
+        Editdump = new Event("dump", "dump");
+
+        datepick.setOnClickListener(listener);
+        timepick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerFragment newFragment = new TimePickerFragment();
+                newFragment.setTargetFragment(Fragment_category_create.this, 0);
+                newFragment.show(getFragmentManager(), "timePicker");
+            }
+        });
+        eventLocation.setOnClickListener(listener);
+        EventSubmit.setOnClickListener(listener);
+
+        return root;
+    }
+
+    public void dialogBuild() {
+        builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Confirm create event?");
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (Lat == null || Lng == null) {
+                    Toast.makeText(getContext(), "Vaccant Location", Toast.LENGTH_SHORT).show();
+                } else if (eventName.getText().toString().isEmpty() || eventDescription.getText().toString().isEmpty()) {
+                    Toast.makeText(getContext(), "Vaccant Block", Toast.LENGTH_SHORT).show();
+                } else {
+                    fetchData();
+                    dialog.dismiss();
+                    new NetUtil.sendEvent(getContext()).execute(Editdump);
+                    Toast.makeText(getContext(), "Submitting", Toast.LENGTH_SHORT).show();
+                }
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 1:
+                if (resultCode == 1) {
+                    Lat = data.getDoubleExtra("Lat", 00);
+                    Lng = data.getDoubleExtra("Lng", 00);
+                    Log.d("lat" + Lat, "lng:" + Lng);
+                }
+                break;
+        }
+    }
+
+    public void fetchData() {
+        Editdump.setEventDetail(eventName.getText().toString(), eventDescription.getText().toString());
+        Editdump.setLatLng(Lat, Lng);
+        Editdump.setTimstamp(year, month, day, hour, min);
+        Editdump.setOrigizator(Settings.USERNAME);
+    }
+
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+        Log.e("onDateSet", "Called");
+        this.year = year;
+        month = monthOfYear;
+        day = dayOfMonth;
+        Log.e("day", String.valueOf(day));
+        Log.e("month", String.valueOf(month));
+        Log.e("year", String.valueOf(year));
+    }
+
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        Log.e("onTimeSet", "Called");
+        Log.e("hr", String.valueOf(hourOfDay));
+        Log.e("min", String.valueOf(minute));
+        hour = hourOfDay;
+        min = minute;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.e("frag4", "onDestroy");
+    }
+
+    @Override
+    public void onDetach() {
+        Log.e("frag4  ", "onDetach");
+        super.onDetach();
+    }
+
+    @Override
+    public void onDestroyView() {
+        Log.e("frag4", "onDestroyView");
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        Log.e("frag4", "onAttach");
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onStart() {
+        Log.e("frag4", "onStart");
+        super.onStart();
+    }
+
+    @Override
+    public void onPause() {
+        Log.e("frag4", "onPause");
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        Log.e("frag4", "onStop");
+        super.onStop();
+    }
+
+    @Override
+    public void onResume() {
+        Log.e("frag4", " onResume");
+        super.onResume();
+    }
+}

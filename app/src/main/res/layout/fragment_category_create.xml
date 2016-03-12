@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="100dp">
+
+    <TableRow>
+
+        <TextView
+            android:text="Event name"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/create_eventname"
+            android:layout_width="wrap_content"
+            android:layout_span="2"
+            android:layout_weight="1"
+            android:allowUndo="false"
+            android:hint="Event Name" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:text="Event time"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/date_click"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="DATE" />
+
+        <Button
+            android:id="@+id/time_click"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TIME" />
+
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:text="Location"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/create_location"
+            android:layout_weight="1"
+            android:text="Location" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:text="Description"
+            android:textSize="20sp" />
+    </TableRow>
+
+    <TableRow>
+
+        <EditText
+            android:id="@+id/create_eventdesc"
+            android:layout_weight="1"
+            android:hint="Desciption"
+            android:minLines="5" />
+    </TableRow>
+
+    <TableRow>
+
+        <Button
+            android:id="@+id/create_submit"
+            android:layout_weight="1"
+            android:text="Submit" />
+    </TableRow>
+
+</TableLayout>
