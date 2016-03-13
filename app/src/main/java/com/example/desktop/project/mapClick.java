@@ -14,38 +14,26 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.util.ArrayList;
 
 public class mapClick extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
-
     public GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e("new Map", "");
         setContentView(R.layout.event_map_click);
-
         Fragment_category_map.mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         Fragment_category_map.mapFragment.getMapAsync(this);
-        Log.e("new Map", "");
     }
 
-    @Override
-    protected void onResumeFragments() {
-        Log.e("resume", "");
-        super.onResumeFragments();
-    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         if (Settings.EventHoldList != null) {
-            parseMarker(googleMap);
+            MapUtil.parseMarker(mMap);
         }
-        initCamera(googleMap);
+        initCamera();
         mMap.setOnMapClickListener(this);
     }
 
@@ -71,19 +59,10 @@ public class mapClick extends FragmentActivity implements OnMapReadyCallback, Go
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Log.e("asda", "backPressed");
         mapClick.this.finish();
     }
 
-    public void parseMarker(GoogleMap googleMap) {
-        ArrayList<Event> arr = new ArrayList<Event>();
-        arr.addAll(Settings.EventHoldList);
-        for (Event evt : arr) {
-            googleMap.addMarker(new MarkerOptions().position(new LatLng(evt.getLat(), evt.getLng())).snippet(evt.getEventDesc()).title(evt.getEventName()));
-        }
-    }
-
-    public void initCamera(GoogleMap mMap) {
+    public void initCamera() {
         if (getIntent().hasExtra("savedLat")) {
             LatLng savedPos = new LatLng(getIntent().getDoubleExtra("savedLat", 0.00), getIntent().getDoubleExtra("savedLng", 0.00));
             CameraPosition currCam = new CameraPosition.Builder().target(savedPos).zoom(15).build();

@@ -1,0 +1,10 @@
+CREATE TABLE `evt` (
+ `evtName` varchar(40) DEFAULT NULL,
+ `evtDesc` varchar(40) DEFAULT NULL,
+ `participant` varchar(200) DEFAULT NULL,
+ `host` varchar(40) DEFAULT NULL,
+ `lat` double DEFAULT NULL,
+ `lng` double DEFAULT NULL,
+ `evtTime` timestamp DEFAULT NULL,
+ `CREATE_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+)

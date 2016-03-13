@@ -60,20 +60,15 @@
         </TableRow>
 
         <TableRow>
-
             <Button
-                android:id="@+id/event_form_submit"
-                android:text="Submit" />
+                android:id="@+id/event_form_update"
+                android:layout_weight="1"
+                android:text="Update" />
 
             <Button
                 android:id="@+id/event_form_delete"
-                android:text="Delete"
-                android:visibility="invisible" />
-
-            <Button
-                android:id="@+id/event_form_update"
-                android:text="Update"
-                android:visibility="invisible" />
+                android:layout_weight="1"
+                android:text="Delete" />
         </TableRow>
 
     </TableLayout>

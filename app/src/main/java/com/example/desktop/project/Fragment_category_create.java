@@ -2,7 +2,6 @@ package com.example.desktop.project;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,44 +16,15 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-public class Fragment_category_create extends Fragment implements TimePickerFragment.OnHeadlineSelectedListener, DatePickerDialog.OnDateSetListener {
+public class Fragment_category_create extends Fragment implements TimePickerFragment.OnHeadlineSelectedListener, DatePickerDialog.OnDateSetListener, View.OnClickListener {
     EditText eventName, eventDescription;
-    Button eventLocation, EventSubmit, delete, update, datepick, timepick;
+    Button eventLocation, EventSubmit, datepick, timepick;
     Double Lat;
     Double Lng;
     AlertDialog.Builder builder;
     Event Editdump;
     int year, month, day, hour, min;
-    View.OnClickListener listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case (R.id.time_click):
-                    TimePickerFragment newFragment = new TimePickerFragment();
-                    newFragment.show(getFragmentManager(), "timePicker");
 
-                    break;
-                case (R.id.date_click):
-                    DatePickerFragment newFragment2 = new DatePickerFragment();
-                    newFragment2.setTargetFragment(Fragment_category_create.this, 2);
-                    newFragment2.show(getFragmentManager(), "datePicker");
-                    break;
-                case (R.id.create_location):
-                    Intent mapClick = new Intent(getContext(), mapClick.class);
-                    if (Lat != null && Lng != null) {
-                        mapClick.putExtra("savedLat", Lat);
-                        mapClick.putExtra("savedLng", Lng);
-                    }
-                    mapClick.putExtra("isEdit", 0);
-                    startActivityForResult(mapClick, 1);
-                    break;
-                case (R.id.create_submit):
-                    dialogBuild();
-                    builder.create().show();
-                    break;
-            }
-        }
-    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -70,19 +40,41 @@ public class Fragment_category_create extends Fragment implements TimePickerFrag
 
         Editdump = new Event("dump", "dump");
 
-        datepick.setOnClickListener(listener);
-        timepick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        datepick.setOnClickListener(this);
+        timepick.setOnClickListener(this);
+        eventLocation.setOnClickListener(this);
+        EventSubmit.setOnClickListener(this);
+
+        return root;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case (R.id.time_click):
                 TimePickerFragment newFragment = new TimePickerFragment();
                 newFragment.setTargetFragment(Fragment_category_create.this, 0);
                 newFragment.show(getFragmentManager(), "timePicker");
-            }
-        });
-        eventLocation.setOnClickListener(listener);
-        EventSubmit.setOnClickListener(listener);
-
-        return root;
+                break;
+            case (R.id.date_click):
+                DatePickerFragment newFragment2 = new DatePickerFragment();
+                newFragment2.setTargetFragment(Fragment_category_create.this, 2);
+                newFragment2.show(getFragmentManager(), "datePicker");
+                break;
+            case (R.id.create_location):
+                Intent mapClick = new Intent(getContext(), mapClick.class);
+                if (Lat != null && Lng != null) {
+                    mapClick.putExtra("savedLat", Lat);
+                    mapClick.putExtra("savedLng", Lng);
+                }
+                mapClick.putExtra("isEdit", 0);
+                startActivityForResult(mapClick, 1);
+                break;
+            case (R.id.create_submit):
+                dialogBuild();
+                builder.create().show();
+                break;
+        }
     }
 
     public void dialogBuild() {
@@ -118,7 +110,6 @@ public class Fragment_category_create extends Fragment implements TimePickerFrag
                 if (resultCode == 1) {
                     Lat = data.getDoubleExtra("Lat", 00);
                     Lng = data.getDoubleExtra("Lng", 00);
-                    Log.d("lat" + Lat, "lng:" + Lng);
                 }
                 break;
         }
@@ -132,21 +123,14 @@ public class Fragment_category_create extends Fragment implements TimePickerFrag
     }
 
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-        Log.e("onDateSet", "Called");
         this.year = year;
         month = monthOfYear;
         day = dayOfMonth;
-        Log.e("day", String.valueOf(day));
-        Log.e("month", String.valueOf(month));
-        Log.e("year", String.valueOf(year));
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        Log.e("onTimeSet", "Called");
-        Log.e("hr", String.valueOf(hourOfDay));
-        Log.e("min", String.valueOf(minute));
         hour = hourOfDay;
         min = minute;
     }
-    }
+}

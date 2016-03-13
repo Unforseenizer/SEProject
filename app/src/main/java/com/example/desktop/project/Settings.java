@@ -11,9 +11,9 @@ public class Settings {
 
     public static String IP_ADDRESS = "192.168.52.52"; //Server IP here
     public static String USERNAME = "null";
-    ; //Settings.USERNAME
-    public static ArrayList<Event> EventHoldList;
     public static Uri propic;
+
+    public static ArrayList<Event> EventHoldList;
     public static EventAdapter adapter;
 }
 

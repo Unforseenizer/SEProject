@@ -24,7 +24,6 @@ public class Event_Join extends AppCompatActivity implements View.OnClickListene
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
         b1 = (Button) findViewById(R.id.join_1);
         b2 = (Button) findViewById(R.id.join_2);
         b3 = (Button) findViewById(R.id.join_3);
