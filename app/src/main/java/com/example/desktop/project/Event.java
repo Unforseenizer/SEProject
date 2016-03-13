@@ -52,13 +52,11 @@ public class Event implements Serializable {
     }
 
     public void joinEvent(String name) {
-        Participant.add(name);
+            Participant.add(name);
     }
 
     public void quitEvent(String name) {
-        if (Participant.indexOf(name) > 0) {
             Participant.remove(name);
-        }
     }
 
     public boolean isParticipant(String name) {

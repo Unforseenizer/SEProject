@@ -111,7 +111,6 @@ public class NetUtil {
                 conn.setDoInput(true);
 
                 in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-                String rawData = "";
                 while ((rawData += in.readLine()) != null && in.ready()) ;
                 JSONArray arr = new JSONArray(rawData);
                 Settings.EventHoldList = new ArrayList<Event>();

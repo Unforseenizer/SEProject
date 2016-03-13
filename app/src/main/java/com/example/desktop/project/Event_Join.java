@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class Event_Join extends AppCompatActivity implements View.OnClickListener {
@@ -72,10 +73,14 @@ public class Event_Join extends AppCompatActivity implements View.OnClickListene
     }
 
     public void joinEvent() {
-        dump.joinEvent(Settings.USERNAME);
-        new NetUtil.updateEvent(Event_Join.this).execute(dump);
-        b1.setVisibility(View.GONE);
-        b3.setVisibility(View.VISIBLE);
+        if (!dump.isParticipant(Settings.USERNAME)) {
+            dump.joinEvent(Settings.USERNAME);
+            new NetUtil.updateEvent(Event_Join.this).execute(dump);
+            b1.setVisibility(View.GONE);
+            b3.setVisibility(View.VISIBLE);
+            Toast.makeText(Event_Join.this, "Joined", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     public void editEvent() {
@@ -85,10 +90,14 @@ public class Event_Join extends AppCompatActivity implements View.OnClickListene
     }
 
     public void quitEvent() {
-        dump.quitEvent(Settings.USERNAME);
-        new NetUtil.updateEvent(Event_Join.this).execute(dump);
-        b3.setVisibility(View.GONE);
-        b1.setVisibility(View.VISIBLE);
+        if (dump.isParticipant(Settings.USERNAME)) {
+            dump.quitEvent(Settings.USERNAME);
+            new NetUtil.updateEvent(Event_Join.this).execute(dump);
+            b3.setVisibility(View.GONE);
+            b1.setVisibility(View.VISIBLE);
+            Toast.makeText(Event_Join.this, "Quited", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     public void showLocation() {

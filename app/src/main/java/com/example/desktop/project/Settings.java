@@ -9,8 +9,8 @@ import java.util.ArrayList;
  */
 public class Settings {
 
-    public static String IP_ADDRESS = "192.168.52.52"; //Server IP here
-    public static String USERNAME = "null";
+    public static String IP_ADDRESS = "172.16.1.8"; //Server IP here
+    public static String USERNAME = "Administrator";
     public static Uri propic;
 
     public static ArrayList<Event> EventHoldList;
