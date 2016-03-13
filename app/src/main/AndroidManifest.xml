@@ -18,7 +18,6 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -31,26 +30,26 @@
             android:name=".SettingActivity"
             android:label="系統設定"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.desktop.project.MainActivity" />
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ProfileActivity"
             android:label="個人設定"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.desktop.project.MainActivity" />
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Event_Edit"
             android:label="Event_Edit"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".mapClick"
+            android:label="@string/title_activity_map_click"
+            android:parentActivityName=".Event_Edit" />
+        <activity
+            android:name=".Event_Join"
+            android:label="@string/title_activity_event__join"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -63,17 +62,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCFhE3V4jRS1UIKgfWbUt-1rKWkq5hI0-w" />
 
-        <activity
-            android:name=".mapClick"
-            android:label="@string/title_activity_map_click">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Event_Edit" />
-        </activity>
-        <activity
-            android:name=".Event_Join"
-            android:label="@string/title_activity_event__join"
-            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>
