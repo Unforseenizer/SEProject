@@ -12,9 +12,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-/**
- * Created by Dudy on 1/3/2016.
- */
+
 public class Fragment_category_eventList extends Fragment {
 
     @Override

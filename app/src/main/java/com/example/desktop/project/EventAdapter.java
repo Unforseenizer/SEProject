@@ -11,8 +11,6 @@ import java.util.ArrayList;
 
 public class EventAdapter extends ArrayAdapter<Event> {
     int ResourceId;
-    Context context;
-    Event item;
 
     public EventAdapter(Context context, int layoutResourceId, ArrayList<Event> obj) {
         super(context, layoutResourceId, obj);

@@ -93,16 +93,4 @@ public class mapClick extends FragmentActivity implements OnMapReadyCallback, Go
             MapUtil.initCamera(mMap);
         }
     }
-
-    @Override
-    public void onDetachedFromWindow() {
-        Log.e("Detach", "");
-        super.onDetachedFromWindow();
-    }
-
-    @Override
-    protected void onDestroy() {
-        Log.e("destroy", "");
-        super.onDestroy();
-    }
 }

@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-public class Event_Join extends AppCompatActivity {
+public class Event_Join extends AppCompatActivity implements View.OnClickListener {
 
     TextView t1, t2, t3, t4, t5;
     Button b1, b2, b3, b4;
@@ -19,14 +19,15 @@ public class Event_Join extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event__join);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
         b1 = (Button) findViewById(R.id.join_1);
         b2 = (Button) findViewById(R.id.join_2);
         b3 = (Button) findViewById(R.id.join_3);
-
         t1 = (TextView) findViewById(R.id.detail_1);
         t2 = (TextView) findViewById(R.id.detail_2);
         t3 = (TextView) findViewById(R.id.detail_3);
@@ -34,8 +35,12 @@ public class Event_Join extends AppCompatActivity {
         t5 = (TextView) findViewById(R.id.detail_5);
         b4 = (Button) findViewById(R.id.detail_location);
 
-        dump = (Event) getIntent().getSerializableExtra("editobj");
+        b1.setOnClickListener(this);
+        b2.setOnClickListener(this);
+        b3.setOnClickListener(this);
+        b4.setOnClickListener(this);
 
+        dump = (Event) getIntent().getSerializableExtra("editobj");
         t1.setText(dump.getEventName());
         t2.setText(dump.getEventDesc());
         t3.setText(dump.getEventTime().toString());
@@ -47,45 +52,31 @@ public class Event_Join extends AppCompatActivity {
             b1.setVisibility(View.VISIBLE);
         else
             b3.setVisibility(View.VISIBLE);
-
-        b2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editEvent();
-            }
-        });
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                joinEvent();
-            }
-        });
-        b3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                quitEvent();
-            }
-        });
-        b4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent mapClick = new Intent(Event_Join.this, mapClick.class);
-                if (dump.getLat() != null && dump.getLng() != null) {
-                    mapClick.putExtra("savedLat", dump.getLat());
-                    mapClick.putExtra("savedLng", dump.getLng());
-                }
-                startActivity(mapClick);
-            }
-        });
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.join_1:
+                joinEvent();
+                break;
+            case R.id.join_2:
+                editEvent();
+                break;
+            case R.id.join_3:
+                quitEvent();
+                break;
+            case R.id.detail_location:
+                showLocation();
+                break;
+        }
+    }
 
     public void joinEvent() {
         dump.joinEvent(Settings.USERNAME);
         new NetUtil.updateEvent(Event_Join.this).execute(dump);
         b1.setVisibility(View.GONE);
         b3.setVisibility(View.VISIBLE);
-
     }
 
     public void editEvent() {
@@ -100,4 +91,14 @@ public class Event_Join extends AppCompatActivity {
         b3.setVisibility(View.GONE);
         b1.setVisibility(View.VISIBLE);
     }
+
+    public void showLocation() {
+        Intent mapClick = new Intent(Event_Join.this, mapClick.class);
+        if (dump.getLat() != null && dump.getLng() != null) {
+            mapClick.putExtra("savedLat", dump.getLat());
+            mapClick.putExtra("savedLng", dump.getLng());
+        }
+        startActivity(mapClick);
+    }
+
 }

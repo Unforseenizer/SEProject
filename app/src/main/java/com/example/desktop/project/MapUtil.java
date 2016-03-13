@@ -9,9 +9,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
-/**
- * Created by Dudy on 9/3/2016.
- */
 public class MapUtil {
     public static void initCamera(GoogleMap mMap) {
         LatLng OUHK = new LatLng(22.316353, 114.180182);
