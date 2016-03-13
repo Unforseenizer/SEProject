@@ -62,6 +62,7 @@ public class Event_Edit extends AppCompatActivity implements View.OnClickListene
                 if (lat != null && lng != null) {
                     mapClick.putExtra("savedLat", lat);
                     mapClick.putExtra("savedLng", lng);
+                    mapClick.putExtra("EDIT_MODE", true);
                 }
                 startActivityForResult(mapClick, 1);
                 break;

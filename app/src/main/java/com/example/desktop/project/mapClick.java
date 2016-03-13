@@ -26,7 +26,6 @@ public class mapClick extends FragmentActivity implements OnMapReadyCallback, Go
         Fragment_category_map.mapFragment.getMapAsync(this);
     }
 
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -34,9 +33,20 @@ public class mapClick extends FragmentActivity implements OnMapReadyCallback, Go
             MapUtil.parseMarker(mMap);
         }
         initCamera();
-        mMap.setOnMapClickListener(this);
-    }
+        if(getIntent().hasExtra("EDIT_MODE")) {
+            mMap.setOnMapClickListener(this);
+        }    }
 
+    public void initCamera() {
+        if (getIntent().hasExtra("savedLat")) {
+            LatLng savedPos = new LatLng(getIntent().getDoubleExtra("savedLat", 0.00), getIntent().getDoubleExtra("savedLng", 0.00));
+            CameraPosition currCam = new CameraPosition.Builder().target(savedPos).zoom(15).build();
+            CameraUpdate pos = CameraUpdateFactory.newCameraPosition(currCam);
+            mMap.animateCamera(pos);
+        } else {
+            MapUtil.initCamera(mMap);
+        }
+    }
     @Override
     public void onMapClick(final LatLng latLng) {
         AlertDialog.Builder builder = new AlertDialog.Builder(mapClick.this);
@@ -49,7 +59,6 @@ public class mapClick extends FragmentActivity implements OnMapReadyCallback, Go
                 intent.putExtra("Lng", latLng.longitude);
                 setResult(1, intent);
                 mapClick.this.finish();
-                Log.e(Double.toString(latLng.latitude), Double.toString(latLng.longitude));
             }
         });
         builder.setNegativeButton("No", null);
@@ -60,16 +69,5 @@ public class mapClick extends FragmentActivity implements OnMapReadyCallback, Go
     public void onBackPressed() {
         super.onBackPressed();
         mapClick.this.finish();
-    }
-
-    public void initCamera() {
-        if (getIntent().hasExtra("savedLat")) {
-            LatLng savedPos = new LatLng(getIntent().getDoubleExtra("savedLat", 0.00), getIntent().getDoubleExtra("savedLng", 0.00));
-            CameraPosition currCam = new CameraPosition.Builder().target(savedPos).zoom(15).build();
-            CameraUpdate pos = CameraUpdateFactory.newCameraPosition(currCam);
-            mMap.animateCamera(pos);
-        } else {
-            MapUtil.initCamera(mMap);
-        }
     }
 }
