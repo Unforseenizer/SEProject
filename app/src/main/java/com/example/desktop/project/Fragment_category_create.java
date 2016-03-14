@@ -29,7 +29,6 @@ public class Fragment_category_create extends Fragment implements TimePickerFrag
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_category_create, null, false);
-        Log.e("frag4", "onCreateView");
 
         eventName = (EditText) root.findViewById(R.id.create_eventname);
         eventDescription = (EditText) root.findViewById(R.id.create_eventdesc);
@@ -67,7 +66,7 @@ public class Fragment_category_create extends Fragment implements TimePickerFrag
                     mapClick.putExtra("savedLat", Lat);
                     mapClick.putExtra("savedLng", Lng);
                 }
-                mapClick.putExtra("isEdit", 0);
+                mapClick.putExtra("EDIT_MODE", true);
                 startActivityForResult(mapClick, 1);
                 break;
             case (R.id.create_submit):

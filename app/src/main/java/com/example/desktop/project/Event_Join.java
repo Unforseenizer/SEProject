@@ -108,5 +108,4 @@ public class Event_Join extends AppCompatActivity implements View.OnClickListene
         }
         startActivity(mapClick);
     }
-
 }

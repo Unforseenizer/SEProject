@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -17,6 +16,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class mapClick extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
     public GoogleMap mMap;
+    public static boolean EDIT_MODE = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +29,10 @@ public class mapClick extends FragmentActivity implements OnMapReadyCallback, Go
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        if (Settings.EventHoldList != null) {
-            MapUtil.parseMarker(mMap);
-        }
+        MapUtil.parseMarker((Settings.EventHoldList != null) ? mMap : null);
         initCamera();
-        if(getIntent().hasExtra("EDIT_MODE")) {
-            mMap.setOnMapClickListener(this);
-        }    }
+        mMap.setOnMapClickListener((EDIT_MODE = getIntent().getBooleanExtra("EDIT_MODE", false)) ? this : null);
+    }
 
     public void initCamera() {
         if (getIntent().hasExtra("savedLat")) {
@@ -47,6 +44,7 @@ public class mapClick extends FragmentActivity implements OnMapReadyCallback, Go
             MapUtil.initCamera(mMap);
         }
     }
+
     @Override
     public void onMapClick(final LatLng latLng) {
         AlertDialog.Builder builder = new AlertDialog.Builder(mapClick.this);
