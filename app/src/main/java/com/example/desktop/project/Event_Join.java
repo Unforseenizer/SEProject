@@ -41,11 +41,7 @@ public class Event_Join extends AppCompatActivity implements View.OnClickListene
         b4.setOnClickListener(this);
 
         dump = (Event) getIntent().getSerializableExtra("editobj");
-        t1.setText(dump.getEventName());
-        t2.setText(dump.getEventDesc());
-        t3.setText(dump.getEventTime().toString());
-        t4.setText(dump.getOrigizator());
-        t5.setText(dump.getParticipant().toString());
+        updateUI();
 
         if (dump.isOriginizator(Settings.USERNAME)) b2.setVisibility(View.VISIBLE);
         else if (!dump.isParticipant(Settings.USERNAME))
@@ -71,7 +67,13 @@ public class Event_Join extends AppCompatActivity implements View.OnClickListene
                 break;
         }
     }
-
+public void updateUI(){
+    t1.setText(dump.getEventName());
+    t2.setText(dump.getEventDesc());
+    t3.setText(dump.getEventTime().toString());
+    t4.setText(dump.getOrigizator());
+    t5.setText(dump.getParticipant().toString());
+}
     public void joinEvent() {
         if (!dump.isParticipant(Settings.USERNAME)) {
             dump.joinEvent(Settings.USERNAME);
@@ -79,6 +81,7 @@ public class Event_Join extends AppCompatActivity implements View.OnClickListene
             b1.setVisibility(View.GONE);
             b3.setVisibility(View.VISIBLE);
             Toast.makeText(Event_Join.this, "Joined", Toast.LENGTH_SHORT).show();
+            updateUI();
         }
 
     }
@@ -96,8 +99,8 @@ public class Event_Join extends AppCompatActivity implements View.OnClickListene
             b3.setVisibility(View.GONE);
             b1.setVisibility(View.VISIBLE);
             Toast.makeText(Event_Join.this, "Quited", Toast.LENGTH_SHORT).show();
+            updateUI();
         }
-
     }
 
     public void showLocation() {

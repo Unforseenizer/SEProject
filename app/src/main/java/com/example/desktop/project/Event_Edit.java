@@ -53,9 +53,19 @@ public class Event_Edit extends AppCompatActivity implements View.OnClickListene
             case R.id.event_form_update:
                 fetchData();
                 new NetUtil.updateEvent(Event_Edit.this).execute(dump);
+                new NetUtil.getJSON(Event_Edit.this).execute();
+                Settings.adapter.clear();
+                Settings.adapter.addAll(Settings.EventHoldList);
+                Settings.adapter.notifyDataSetChanged();
+                this.finish();
                 break;
             case R.id.event_form_delete:
                 new NetUtil.delEvent(Event_Edit.this).execute(dump);
+                new NetUtil.getJSON(Event_Edit.this).execute();
+                Settings.adapter.clear();
+                Settings.adapter.addAll(Settings.EventHoldList);
+                Settings.adapter.notifyDataSetChanged();
+                this.finish();
                 break;
             case R.id.val_location:
                 Intent mapClick = new Intent(Event_Edit.this, mapClick.class);

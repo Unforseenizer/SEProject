@@ -42,7 +42,8 @@ public class Event implements Serializable {
         eventName = e.getEventName();
         eventTime = e.getEventTime();
         eventDesc = e.getEventDesc();
-        Participant.addAll((!e.getParticipant().isEmpty() && e.getParticipant() != null) ? e.getParticipant() : null);
+        if (!e.getParticipant().isEmpty() && e.getParticipant() != null)
+            Participant.addAll(e.getParticipant());
         Origizator = e.getOrigizator();
         Lat = e.getLat();
         Lng = e.getLng();
@@ -58,7 +59,7 @@ public class Event implements Serializable {
     }
 
     public boolean isParticipant(String name) {
-        for (int i = 1; i < Participant.size(); i++) {
+        for (int i = 0; i < Participant.size(); i++) {
             if (name.equals(Participant.get(i))) {
                 return true;
             }
