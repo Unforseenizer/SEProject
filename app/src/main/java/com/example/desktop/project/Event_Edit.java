@@ -1,5 +1,6 @@
 package com.example.desktop.project;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -61,6 +62,7 @@ public class Event_Edit extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.event_form_delete:
                 new NetUtil.delEvent(Event_Edit.this).execute(dump);
+
                 new NetUtil.getJSON(Event_Edit.this).execute();
                 Settings.adapter.clear();
                 Settings.adapter.addAll(Settings.EventHoldList);

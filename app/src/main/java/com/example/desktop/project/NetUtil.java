@@ -1,6 +1,7 @@
 package com.example.desktop.project;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -152,9 +153,17 @@ public class NetUtil {
         private Context mContext;
         private String str2;
         private String create_time;
+        ProgressDialog pd;
 
         public delEvent(Context context) {
             this.mContext = context;
+            pd = new ProgressDialog(mContext);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            pd.show();
+            super.onPreExecute();
         }
 
         @Override
@@ -195,11 +204,8 @@ public class NetUtil {
         @Override
         protected void onPostExecute(String res) {
             super.onPostExecute(res);
-            Log.e("result", "onPostExecute");
-            ((Activity) mContext).finish();
-            Settings.adapter.clear();
-            Settings.adapter.addAll(Settings.EventHoldList);
-            Settings.adapter.notifyDataSetChanged();
+            System.out.print(pd.getProgress());
+            pd.dismiss();
             Toast.makeText(mContext, "Server REPLY : " + res, Toast.LENGTH_SHORT).show();
         }
     }
