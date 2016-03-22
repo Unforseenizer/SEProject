@@ -1,6 +1,5 @@
 package com.example.desktop.project;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -58,6 +57,8 @@ public class Event_Edit extends AppCompatActivity implements View.OnClickListene
                 Settings.adapter.clear();
                 Settings.adapter.addAll(Settings.EventHoldList);
                 Settings.adapter.notifyDataSetChanged();
+                getSupportFragmentManager().popBackStack("MainList", 0);
+
                 this.finish();
                 break;
             case R.id.event_form_delete:

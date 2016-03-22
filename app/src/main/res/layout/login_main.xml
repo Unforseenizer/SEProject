@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:stretchColumns="1">
+    android:stretchColumns="1"
+    style="@style/AppTheme">
 
     <TextView
         android:id="@+id/loginshortcut"
