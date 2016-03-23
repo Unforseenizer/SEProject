@@ -24,9 +24,20 @@ public class NetUtil {
     public static class sendEvent extends AsyncTask<Event, Integer, String> {
         private Context mContext;
         private String str2;
-
+ProgressDialog pd;
         public sendEvent(Context context) {
             this.mContext = context;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            pd = new ProgressDialog(mContext);
+            pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            pd.setIndeterminateDrawable(mContext.getResources().getDrawable(R.drawable.ic_app));
+            pd.setIndeterminate(true);
+            pd.setMessage("Loading...");
+            pd.show();
+            super.onPreExecute();
         }
 
         @Override
@@ -82,6 +93,7 @@ public class NetUtil {
         @Override
         protected void onPostExecute(String res) {
             super.onPostExecute(res);
+            pd.dismiss();
             Log.e("result", "onPostExecute");
             ((Activity) mContext).finish();
             Toast.makeText(mContext, "Server REPLY : " + res, Toast.LENGTH_SHORT).show();
