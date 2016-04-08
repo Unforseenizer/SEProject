@@ -1,4 +1,4 @@
-package com.example.desktop.project;
+package com.example.desktop.event;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

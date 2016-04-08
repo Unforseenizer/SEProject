@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".Event_Edit">
+    tools:context="com.example.desktop.event.Event_Edit">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

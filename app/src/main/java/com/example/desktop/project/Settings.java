@@ -2,6 +2,8 @@ package com.example.desktop.project;
 
 import android.net.Uri;
 
+import com.example.desktop.event.Event;
+
 import java.util.ArrayList;
 
 /**

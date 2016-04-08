@@ -1,11 +1,15 @@
-package com.example.desktop.project;
+package com.example.desktop.event;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.example.desktop.project.R;
+import com.example.desktop.project.Settings;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,6 +28,7 @@ public class NetUtil {
     public static class sendEvent extends AsyncTask<Event, Integer, String> {
         private Context mContext;
         private String str2;
+        private AnimationDrawable animation;
 ProgressDialog pd;
         public sendEvent(Context context) {
             this.mContext = context;

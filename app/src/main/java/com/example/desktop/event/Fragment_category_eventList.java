@@ -1,4 +1,4 @@
-package com.example.desktop.project;
+package com.example.desktop.event;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.example.desktop.project.EventAdapter;
+import com.example.desktop.project.R;
+import com.example.desktop.project.Settings;
 
 import java.util.ArrayList;
 

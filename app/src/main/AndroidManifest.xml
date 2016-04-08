@@ -37,16 +37,16 @@
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Event_Edit"
+            android:name="com.example.desktop.event.Event_Edit"
             android:label="Event_Edit"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".mapClick"
+            android:name="com.example.desktop.event.mapClick"
             android:label="@string/title_activity_map_click"
-            android:parentActivityName=".Event_Edit" />
+            android:parentActivityName="com.example.desktop.event.Event_Edit" />
         <activity
-            android:name=".Event_Join"
+            android:name="com.example.desktop.event.Event_Join"
             android:label="@string/title_activity_event__join"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme" />

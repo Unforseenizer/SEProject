@@ -1,4 +1,4 @@
-package com.example.desktop.project;
+package com.example.desktop.event;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +14,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.example.desktop.project.R;
+import com.example.desktop.project.Settings;
 
 public class Fragment_category_create extends Fragment implements TimePickerFragment.OnHeadlineSelectedListener, DatePickerDialog.OnDateSetListener, View.OnClickListener {
     EditText eventName, eventDescription;

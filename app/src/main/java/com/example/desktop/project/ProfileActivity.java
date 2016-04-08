@@ -26,7 +26,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+getSupportActionBar().setCustomView();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         profilepic = (ImageView) findViewById(R.id.profilepic);
