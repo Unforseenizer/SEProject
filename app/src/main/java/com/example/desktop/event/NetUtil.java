@@ -27,10 +27,11 @@ import java.util.ArrayList;
 
 public class NetUtil {
     public static class sendEvent extends AsyncTask<Event, Integer, String> {
+        ProgressDialog pd;
         private Context mContext;
         private String str2;
         private AnimationDrawable animation;
-ProgressDialog pd;
+
         public sendEvent(Context context) {
             this.mContext = context;
         }
@@ -110,7 +111,8 @@ ProgressDialog pd;
 
         String rawData = "";
         private Context mContext;
-private SwipeRefreshLayout swipe;
+        private SwipeRefreshLayout swipe;
+
         public getJSON(Context context) {
             this.mContext = context;
         }
@@ -167,17 +169,17 @@ private SwipeRefreshLayout swipe;
             Settings.adapter.clear();
             Settings.adapter.addAll(Settings.EventHoldList);
             Settings.adapter.notifyDataSetChanged();
-            if(swipe!=null)
+            if (swipe != null)
                 swipe.setRefreshing(false);
         }
 
     }
 
     public static class delEvent extends AsyncTask<Event, Void, String> {
+        ProgressDialog pd;
         private Context mContext;
         private String str2;
         private String create_time;
-        ProgressDialog pd;
 
         public delEvent(Context context) {
             this.mContext = context;

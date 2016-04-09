@@ -17,8 +17,8 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 
 public class mapClick extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
-    public GoogleMap mMap;
     public static boolean EDIT_MODE = false;
+    public GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

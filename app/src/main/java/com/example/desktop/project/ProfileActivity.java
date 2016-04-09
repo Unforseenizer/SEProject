@@ -17,7 +17,8 @@ public class ProfileActivity extends AppCompatActivity {
     int[] sport = {R.mipmap.sport1, R.mipmap.sport2};
     int[] travel = {R.mipmap.travel1, R.mipmap.travel2};
     int[] other = {R.mipmap.other1, R.mipmap.other2};
-private Toolbar toolbar;
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

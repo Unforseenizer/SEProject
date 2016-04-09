@@ -78,10 +78,10 @@ public class MsgTask {
     }
 
     public static class getMsg extends AsyncTask<String, Void, String> {
-        private SwipeRefreshLayout swipe;
-        private RecyclerView.Adapter adapter;
         MessageList messageList = new MessageList();
         Context mContext;
+        private SwipeRefreshLayout swipe;
+        private RecyclerView.Adapter adapter;
 
         public getMsg(SwipeRefreshLayout swipe) {
             this.swipe = swipe;
@@ -103,7 +103,7 @@ public class MsgTask {
 
         @Override
         protected String doInBackground(String... params) {
-            String path = "http://" + Settings.IP_ADDRESS +"/queryMessage.php?recipient="+ params[0];
+            String path = "http://" + Settings.IP_ADDRESS + "/queryMessage.php?recipient=" + params[0];
             BufferedReader in;
             DataOutputStream out;
             StringBuilder rawData = new StringBuilder();
@@ -148,13 +148,13 @@ public class MsgTask {
             if (adapter != null) {
                 adapter.notifyDataSetChanged();
             }
-            if (!messageList.fetchUnread().isEmpty()&&mContext!=null) {
+            if (!messageList.fetchUnread().isEmpty() && mContext != null) {
                 NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
                 Intent intent2 = new Intent(mContext, MessageList.class);
                 PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent2, 0);
                 Notification notification = new Notification.Builder(mContext).
                         setSmallIcon(R.drawable.ic_app).
-                        setContentTitle(messageList.getUnread().get(messageList.getUnread().size()-1).getTitle()).
+                        setContentTitle(messageList.getUnread().get(messageList.getUnread().size() - 1).getTitle()).
                         setContentText(String.format("You have %d unread message.", messageList.getUnread().size())).
                         setContentInfo("This is Info").
                         setContentIntent(pendingIntent).

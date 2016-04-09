@@ -6,9 +6,6 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.desktop.project.EventDataBaseAdapter;
-import com.example.desktop.project.LoginDataBaseAdapter;
-
 public class DataBaseHelper extends SQLiteOpenHelper {
     public DataBaseHelper(Context context, String name, CursorFactory factory, int version) {
         super(context, name, factory, version);

@@ -26,7 +26,8 @@ public class MsgFragment extends Fragment implements SwipeRefreshLayout.OnRefres
     RecyclerView recyclerView;
     SwipeRefreshLayout swipe;
     MsgAdapter msgAdapter;
-MessageList messageList = new MessageList();
+    MessageList messageList = new MessageList();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +52,7 @@ MessageList messageList = new MessageList();
         swipe = (SwipeRefreshLayout) view.findViewById(R.id.msg_swipe);
         swipe.setOnRefreshListener(this);
 
-        new MsgTask.getMsg(getContext(), msgAdapter,swipe).execute(Settings.USERNAME);
+        new MsgTask.getMsg(getContext(), msgAdapter, swipe).execute(Settings.USERNAME);
         messageList.clearUnread();
     }
 
@@ -83,6 +84,6 @@ MessageList messageList = new MessageList();
 
     @Override
     public void onRefresh() {
-        new MsgTask.getMsg(getContext(), msgAdapter,swipe).execute(Settings.USERNAME);
+        new MsgTask.getMsg(getContext(), msgAdapter, swipe).execute(Settings.USERNAME);
     }
 }

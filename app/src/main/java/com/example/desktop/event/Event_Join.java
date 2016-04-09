@@ -70,13 +70,15 @@ public class Event_Join extends AppCompatActivity implements View.OnClickListene
                 break;
         }
     }
-public void updateUI(){
-    t1.setText(dump.getEventName());
-    t2.setText(dump.getEventDesc());
-    t3.setText(dump.getEventTime().toString());
-    t4.setText(dump.getOrigizator());
-    t5.setText(dump.getParticipant().toString());
-}
+
+    public void updateUI() {
+        t1.setText(dump.getEventName());
+        t2.setText(dump.getEventDesc());
+        t3.setText(dump.getEventTime().toString());
+        t4.setText(dump.getOrigizator());
+        t5.setText(dump.getParticipant().toString());
+    }
+
     public void joinEvent() {
         if (!dump.isParticipant(Settings.USERNAME)) {
             dump.joinEvent(Settings.USERNAME);

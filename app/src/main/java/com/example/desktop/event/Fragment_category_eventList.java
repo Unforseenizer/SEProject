@@ -1,7 +1,6 @@
 package com.example.desktop.event;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -51,7 +50,7 @@ public class Fragment_category_eventList extends Fragment implements SwipeRefres
 
     @Override
     public void onRefresh() {
-        NetUtil.getJSON task = new NetUtil.getJSON(getContext(),swipe);
+        NetUtil.getJSON task = new NetUtil.getJSON(getContext(), swipe);
         task.execute();
     }
 }

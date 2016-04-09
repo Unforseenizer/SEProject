@@ -16,17 +16,17 @@ public class MessageList {
     private static Timestamp timestamp = new Timestamp(1);
     private static boolean NOTIFY_BIT = false;
 
-    public void setMsgList(List<Message> msgList) {
-        this.msgList.clear();
-        this.msgList.addAll(msgList);
+    public static ArrayList<Message> getUnread() {
+        return unread;
     }
 
     public ArrayList<Message> getMsgList() {
         return msgList;
     }
 
-    public static ArrayList<Message> getUnread() {
-        return unread;
+    public void setMsgList(List<Message> msgList) {
+        this.msgList.clear();
+        this.msgList.addAll(msgList);
     }
 
     public ArrayList<Message> fetchUnread() {
