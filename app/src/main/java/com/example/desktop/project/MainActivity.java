@@ -15,7 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.desktop.event.Fragment_category;
-import com.example.desktop.msg.msg_done.MsgFragment;
+import com.example.desktop.msg.MsgFragment;
+import com.example.desktop.msg.MsgServices;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -24,6 +25,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawer;
     ActionBarDrawerToggle toggle;
     NavigationView navigationView;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent servIntent = new Intent(this, MsgServices.class);
+        startService(servIntent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -7,8 +7,9 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
-import com.example.desktop.msg.msg_done.MsgTask;
+import com.example.desktop.project.Settings;
 
 public class MsgServices extends Service {
 
@@ -24,14 +25,14 @@ public class MsgServices extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        new MsgTask.getMsg().execute();
+        new MsgTask.getMsg(this).execute(Settings.USERNAME);
 
         AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        int second = 1000;
-        long trigger = SystemClock.elapsedRealtime() + second;
-        Intent intent1 = new Intent(this, MessageList.class);
+        long trigger = SystemClock.elapsedRealtime() + Settings.REFRESH_INTERVAL;
+        Intent intent1 = new Intent("MESSAGE_SERVICE");
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent1, 0);
         manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, trigger, pendingIntent);
+        Log.e("SERVICE", "START");
         return super.onStartCommand(intent, flags, startId);
     }
 }

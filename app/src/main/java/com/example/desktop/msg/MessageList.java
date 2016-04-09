@@ -2,8 +2,6 @@ package com.example.desktop.msg;
 
 import android.util.Log;
 
-import com.example.desktop.msg.msg_done.Message;
-
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,6 +18,10 @@ public class MessageList {
         return unread;
     }
 
+    public static boolean isNotifyBit() {
+        return NOTIFY_BIT;
+    }
+
     public ArrayList<Message> getMsgList() {
         return msgList;
     }
@@ -30,12 +32,15 @@ public class MessageList {
     }
 
     public ArrayList<Message> fetchUnread() {
+        int oldSize = unread.size();
         unread.clear();
         if (!msgList.isEmpty() && msgList != null) {
             for (Message msg : msgList) {
                 if (msg.getMsgTime().after(timestamp))
                     unread.add(msg);
             }
+            if (unread.size() > oldSize)
+                NOTIFY_BIT = false;
         }
         Log.e("UNREAD", String.valueOf(msgList.size()));
         Log.e("UNREAD", String.valueOf(NOTIFY_BIT));
@@ -43,14 +48,15 @@ public class MessageList {
     }
 
     public void clearUnread() {
-        Message max = (unread != null && !unread.isEmpty())
-                ? Collections.max(unread, new Comparator<Message>() {
-            @Override
-            public int compare(Message lhs, Message rhs) {
-                return lhs.getMsgTime().compareTo(rhs.getMsgTime());
-            }
-        }) : null;
-        timestamp = (max != null) ? max.getMsgTime() : new Timestamp(1);
+        if (unread != null && !unread.isEmpty()) {
+            Message max = Collections.max(unread, new Comparator<Message>() {
+                @Override
+                public int compare(Message lhs, Message rhs) {
+                    return lhs.getMsgTime().compareTo(rhs.getMsgTime());
+                }
+            });
+            timestamp = max.getMsgTime();
+        }
         unread.clear();
         NOTIFY_BIT = false;
         Log.e("Clear Unread", timestamp.toString());
@@ -59,5 +65,4 @@ public class MessageList {
     public void setNotify() {
         NOTIFY_BIT = true;
     }
-
 }

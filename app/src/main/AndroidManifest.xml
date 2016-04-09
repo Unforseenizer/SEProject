@@ -53,9 +53,10 @@
             android:theme="@style/AppTheme" />
         <!--MESSAGE PART-->
         <activity
-            android:name="com.example.desktop.msg.msg_done.MsgCreate"
+            android:name="com.example.desktop.msg.MsgCreate"
             android:parentActivityName=".MainActivity" />
-        <receiver android:name="com.example.desktop.msg.msg_done.ServReceiver">
+        <service android:name="com.example.desktop.msg.MsgServices"/>
+        <receiver android:name="com.example.desktop.msg.ServReceiver">
             <intent-filter>
                 <action android:name="MESSAGE_SERVICE" />
             </intent-filter>
