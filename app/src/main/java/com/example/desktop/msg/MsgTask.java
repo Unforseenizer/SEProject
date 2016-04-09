@@ -1,16 +1,16 @@
-package com.example.desktop.msg.msg_done;
+package com.example.desktop.msg;
 
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import com.example.desktop.msg.MessageList;
 import com.example.desktop.project.R;
 import com.example.desktop.project.Settings;
 
@@ -79,18 +79,10 @@ public class MsgTask {
 
     public static class getMsg extends AsyncTask<String, Void, String> {
         MessageList messageList = new MessageList();
+        ArrayList<Message> unread = new ArrayList<>();
         Context mContext;
         private SwipeRefreshLayout swipe;
         private RecyclerView.Adapter adapter;
-
-        public getMsg(SwipeRefreshLayout swipe) {
-            this.swipe = swipe;
-        }
-
-        public getMsg(SwipeRefreshLayout swipe, RecyclerView.Adapter adapter) {
-            this.swipe = swipe;
-            this.adapter = adapter;
-        }
 
         public getMsg(Context mContext, RecyclerView.Adapter adapter, SwipeRefreshLayout swipe) {
             this.mContext = mContext;
@@ -98,7 +90,8 @@ public class MsgTask {
             this.swipe = swipe;
         }
 
-        public getMsg() {
+        public getMsg(Context mContext) {
+            this.mContext = mContext;
         }
 
         @Override
@@ -148,18 +141,25 @@ public class MsgTask {
             if (adapter != null) {
                 adapter.notifyDataSetChanged();
             }
-            if (!messageList.fetchUnread().isEmpty() && mContext != null) {
+
+            if (!(unread = messageList.fetchUnread()).isEmpty() && mContext != null && !messageList.isNotifyBit()) {
                 NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
                 Intent intent2 = new Intent(mContext, MessageList.class);
                 PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent2, 0);
-                Notification notification = new Notification.Builder(mContext).
-                        setSmallIcon(R.drawable.ic_app).
-                        setContentTitle(messageList.getUnread().get(messageList.getUnread().size() - 1).getTitle()).
-                        setContentText(String.format("You have %d unread message.", messageList.getUnread().size())).
-                        setContentInfo("This is Info").
-                        setContentIntent(pendingIntent).
-                        build();
+                long[] vib = {200, 200, 200, 200};
+                Notification notification = new Notification.Builder(mContext)
+                        .setSmallIcon(R.drawable.ic_app)
+                        .setContentTitle(messageList.getUnread().get(messageList.getUnread().size() - 1).getTitle())
+                        .setContentText(String.format("You have %d unread message.", messageList.getUnread().size()))
+                        .setContentInfo("This is Info")
+                        .setContentIntent(pendingIntent)
+                        .setLights(0xff0000ff, 100, 100)
+                        .setVibrate(vib)
+                        .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                        .build();
+                messageList.setNotify();
                 notificationManager.notify(1, notification);
+
             }
         }
     }

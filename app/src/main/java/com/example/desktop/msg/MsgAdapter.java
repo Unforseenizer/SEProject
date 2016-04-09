@@ -1,4 +1,4 @@
-package com.example.desktop.msg.msg_done;
+package com.example.desktop.msg;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

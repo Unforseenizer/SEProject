@@ -1,4 +1,4 @@
-package com.example.desktop.msg.msg_done;
+package com.example.desktop.msg;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
