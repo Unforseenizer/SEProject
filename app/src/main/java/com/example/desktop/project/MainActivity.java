@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.desktop.event.Fragment_category;
+import com.example.desktop.msg.msg_done.MsgFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -83,6 +84,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(MainActivity.this, "Logout Sucessful.", Toast.LENGTH_SHORT);
                 startActivity(intent);
                 this.finish();
+                break;
+            case R.id.nav_message:
+                MsgFragment msgFragment = new MsgFragment();
+                ft.replace(R.id.fragment_content, msgFragment).commit();
                 break;
             default:
                 break;

@@ -15,7 +15,7 @@ public class SettingActivity extends AppCompatActivity implements SettingActivit
         setContentView(R.layout.setting_activity);
         f1 = (SettingActivityFragment) getSupportFragmentManager().findFragmentById(R.id.setting_fragment);
         f1.setcomm(this);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.action_bar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

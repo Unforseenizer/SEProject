@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -109,9 +110,14 @@ ProgressDialog pd;
 
         String rawData = "";
         private Context mContext;
-
+private SwipeRefreshLayout swipe;
         public getJSON(Context context) {
             this.mContext = context;
+        }
+
+        public getJSON(Context mContext, SwipeRefreshLayout swipe) {
+            this.mContext = mContext;
+            this.swipe = swipe;
         }
 
         @Override
@@ -161,7 +167,8 @@ ProgressDialog pd;
             Settings.adapter.clear();
             Settings.adapter.addAll(Settings.EventHoldList);
             Settings.adapter.notifyDataSetChanged();
-            Log.e("Browse", "Post, Execute");
+            if(swipe!=null)
+                swipe.setRefreshing(false);
         }
 
     }

@@ -36,6 +36,7 @@
             android:label="個人設定"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme" />
+        <!--EVENT PART-->
         <activity
             android:name="com.example.desktop.event.Event_Edit"
             android:label="Event_Edit"
@@ -50,6 +51,11 @@
             android:label="@string/title_activity_event__join"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme" />
+        <!--MESSAGE PART-->
+        <activity
+            android:name="com.example.desktop.msg.msg_done.MsgCreate"
+            android:parentActivityName=".MainActivity" />
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -61,8 +67,5 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCFhE3V4jRS1UIKgfWbUt-1rKWkq5hI0-w" />
-
-
     </application>
-
 </manifest>

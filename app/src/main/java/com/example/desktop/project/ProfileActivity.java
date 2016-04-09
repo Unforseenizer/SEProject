@@ -17,16 +17,15 @@ public class ProfileActivity extends AppCompatActivity {
     int[] sport = {R.mipmap.sport1, R.mipmap.sport2};
     int[] travel = {R.mipmap.travel1, R.mipmap.travel2};
     int[] other = {R.mipmap.other1, R.mipmap.other2};
-
+private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_activity);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.action_bar);
         setSupportActionBar(toolbar);
-getSupportActionBar().setCustomView();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         profilepic = (ImageView) findViewById(R.id.profilepic);
