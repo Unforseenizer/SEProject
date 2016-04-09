@@ -22,6 +22,11 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.MsgHolder> {
     }
 
     @Override
+    public void registerAdapterDataObserver(RecyclerView.AdapterDataObserver observer) {
+        super.registerAdapterDataObserver(observer);
+    }
+
+    @Override
     public MsgAdapter.MsgHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new MsgHolder(inflater.inflate(R.layout.msg_row, parent, false));
     }

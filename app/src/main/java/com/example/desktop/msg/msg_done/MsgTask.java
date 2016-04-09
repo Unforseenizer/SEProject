@@ -1,9 +1,17 @@
 package com.example.desktop.msg.msg_done;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.example.desktop.msg.MessageList;
+import com.example.desktop.project.R;
 import com.example.desktop.project.Settings;
 
 import org.json.JSONArray;
@@ -70,9 +78,32 @@ public class MsgTask {
     }
 
     public static class getMsg extends AsyncTask<String, Void, String> {
+        private SwipeRefreshLayout swipe;
+        private RecyclerView.Adapter adapter;
+        MessageList messageList = new MessageList();
+        Context mContext;
+
+        public getMsg(SwipeRefreshLayout swipe) {
+            this.swipe = swipe;
+        }
+
+        public getMsg(SwipeRefreshLayout swipe, RecyclerView.Adapter adapter) {
+            this.swipe = swipe;
+            this.adapter = adapter;
+        }
+
+        public getMsg(Context mContext, RecyclerView.Adapter adapter, SwipeRefreshLayout swipe) {
+            this.mContext = mContext;
+            this.adapter = adapter;
+            this.swipe = swipe;
+        }
+
+        public getMsg() {
+        }
+
         @Override
         protected String doInBackground(String... params) {
-            String path = "http://" + Settings.IP_ADDRESS + "/queryMessage.php";
+            String path = "http://" + Settings.IP_ADDRESS +"/queryMessage.php?recipient="+ params[0];
             BufferedReader in;
             DataOutputStream out;
             StringBuilder rawData = new StringBuilder();
@@ -96,17 +127,40 @@ public class MsgTask {
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject obj = arr.getJSONObject(i);
                     Message dump = new Message(obj.getString("sender")
-                            ,obj.getString("recipient")
-                            ,obj.getString("title")
-                            ,obj.getString("content"));
+                            , obj.getString("recipient")
+                            , obj.getString("title")
+                            , obj.getString("content"));
                     dump.setMsgTime(obj.getString("createtime"));
                     msgList.add(dump);
                 }
-                new MessageList().setMsgList(msgList);
+                messageList.setMsgList(msgList);
             } catch (Exception e) {
                 e.printStackTrace();
             }
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if (swipe != null)
+                swipe.setRefreshing(false);
+            if (adapter != null) {
+                adapter.notifyDataSetChanged();
+            }
+            if (!messageList.fetchUnread().isEmpty()&&mContext!=null) {
+                NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+                Intent intent2 = new Intent(mContext, MessageList.class);
+                PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent2, 0);
+                Notification notification = new Notification.Builder(mContext).
+                        setSmallIcon(R.drawable.ic_app).
+                        setContentTitle(messageList.getUnread().get(messageList.getUnread().size()-1).getTitle()).
+                        setContentText(String.format("You have %d unread message.", messageList.getUnread().size())).
+                        setContentInfo("This is Info").
+                        setContentIntent(pendingIntent).
+                        build();
+                notificationManager.notify(1, notification);
+            }
         }
     }
 }

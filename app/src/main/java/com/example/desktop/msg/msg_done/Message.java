@@ -16,6 +16,9 @@ public class Message {
         Content = content;
     }
 
+    public Message() {
+    }
+
     public Timestamp getMsgTime() {
         return msgTime;
     }

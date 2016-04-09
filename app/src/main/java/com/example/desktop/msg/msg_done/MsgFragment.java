@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,14 +15,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.desktop.msg.MessageList;
+import com.example.desktop.project.MainActivity;
 import com.example.desktop.project.R;
+import com.example.desktop.project.Settings;
 
 import java.util.List;
 
 
-public class MsgFragment extends Fragment {
+public class MsgFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     RecyclerView recyclerView;
-
+    SwipeRefreshLayout swipe;
+    MsgAdapter msgAdapter;
+MessageList messageList = new MessageList();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,15 +38,21 @@ public class MsgFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = (RecyclerView) getActivity().findViewById(R.id.recycler);
 
-        List<Message> list = new MessageList().getMsgList();
+        List<Message> list = messageList.getMsgList();
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        MsgAdapter msgAdapter = new MsgAdapter(getContext(), list);
+        msgAdapter = new MsgAdapter(getContext(), list);
 
         recyclerView.setAdapter(msgAdapter);
+
+        swipe = (SwipeRefreshLayout) view.findViewById(R.id.msg_swipe);
+        swipe.setOnRefreshListener(this);
+
+        new MsgTask.getMsg(getContext(), msgAdapter,swipe).execute(Settings.USERNAME);
+        messageList.clearUnread();
     }
 
     @Nullable
@@ -49,7 +60,8 @@ public class MsgFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
         View root = inflater.inflate(R.layout.msg_list, container, false);
-        getActivity().getActionBar().setTitle("Message");
+
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle("Message");
         //recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         return root;
     }
@@ -67,5 +79,10 @@ public class MsgFragment extends Fragment {
                 startActivity(msg_create);
         }
         return true;
+    }
+
+    @Override
+    public void onRefresh() {
+        new MsgTask.getMsg(getContext(), msgAdapter,swipe).execute(Settings.USERNAME);
     }
 }

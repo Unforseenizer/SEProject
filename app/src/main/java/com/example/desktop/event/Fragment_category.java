@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.desktop.project.MainActivity;
 import com.example.desktop.project.R;
 
 public class Fragment_category extends Fragment {
@@ -22,7 +23,7 @@ public class Fragment_category extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_category, null);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getActivity().getSupportFragmentManager());
-
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle("Event");
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) root.findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
