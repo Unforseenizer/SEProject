@@ -15,6 +15,7 @@ import java.util.List;
 public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.MsgHolder> {
     LayoutInflater inflater;
     List<Message> data = Collections.emptyList();
+    ClickListener clickListener;
 
     public MsgAdapter(Context mContext, List<Message> data) {
         inflater = LayoutInflater.from(mContext);
@@ -39,19 +40,37 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.MsgHolder> {
         holder.time.setText(msg.getMsgTime().toString());
     }
 
+    public void setClickListener(ClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
     @Override
     public int getItemCount() {
         return data == null ? 0 : data.size();
     }
 
-    class MsgHolder extends RecyclerView.ViewHolder {
+    class MsgHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView sender, title, time;
 
         public MsgHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             sender = (TextView) itemView.findViewById(R.id.row1);
             title = (TextView) itemView.findViewById(R.id.row2);
             time = (TextView) itemView.findViewById(R.id.row3);
         }
+
+        @Override
+        public void onClick(View v) {
+            if (clickListener != null) {
+                clickListener.itemClicked(v, getLayoutPosition());
+            }
+
+        }
+    }
+
+
+    public interface ClickListener {
+        public void itemClicked(View view, int position);
     }
 }

@@ -1,9 +1,7 @@
 package com.example.desktop.msg;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,7 +19,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.example.desktop.project.MainActivity;
 import com.example.desktop.project.R;
@@ -30,13 +29,14 @@ import com.example.desktop.project.Settings;
 import java.util.List;
 
 
-public class MsgFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, RecyclerView.OnItemTouchListener {
-   static View root;
+public class MsgFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, RecyclerView.OnItemTouchListener, MsgAdapter.ClickListener {
+    static View root;
     RecyclerView recyclerView;
     static PopupWindow mPopupWindow;
     SwipeRefreshLayout swipe;
     MsgAdapter msgAdapter;
     MessageList messageList = new MessageList();
+    TextView v1, v2, v3, v4;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,12 +52,23 @@ public class MsgFragment extends Fragment implements SwipeRefreshLayout.OnRefres
         root = inflater.inflate(R.layout.msg_list, container, false);
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("Message");
 
+        setupPopupWindow(inflater);
+        //recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        return root;
+    }
+
+    public void setupPopupWindow(LayoutInflater inflater) {
         View popupView = inflater.inflate(R.layout.msg_dialog, null);
 
-        mPopupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        v1 = (TextView) popupView.findViewById(R.id.msg_infoSender);
+        v2 = (TextView) popupView.findViewById(R.id.msg_infoRecipient);
+        v3 = (TextView) popupView.findViewById(R.id.msg_infoTitle);
+        v4 = (TextView) popupView.findViewById(R.id.msg_infoContent);
+
+        mPopupWindow = new PopupWindow(popupView, 1000, 1000, true);
         mPopupWindow.setTouchable(true);
         mPopupWindow.setOutsideTouchable(true);
-        mPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffFEBB31")));
+        mPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#13ADAD")));
         mPopupWindow.getContentView().setFocusableInTouchMode(true);
         mPopupWindow.getContentView().setFocusable(true);
         mPopupWindow.setAnimationStyle(R.style.anim_menu_bottombar);
@@ -74,10 +85,8 @@ public class MsgFragment extends Fragment implements SwipeRefreshLayout.OnRefres
                 return false;
             }
         });
-
-        //recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        return root;
     }
+
     public static boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_MENU && event.getRepeatCount() == 0) {
             if (mPopupWindow != null && !mPopupWindow.isShowing()) {
@@ -103,6 +112,8 @@ public class MsgFragment extends Fragment implements SwipeRefreshLayout.OnRefres
         recyclerView.setAdapter(msgAdapter);
         recyclerView.addOnItemTouchListener(this);
 
+        msgAdapter.setClickListener(this);
+
         swipe = (SwipeRefreshLayout) view.findViewById(R.id.msg_swipe);
         swipe.setOnRefreshListener(this);
 
@@ -127,26 +138,33 @@ public class MsgFragment extends Fragment implements SwipeRefreshLayout.OnRefres
 
     @Override
     public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-        Log.e("OnTouch","s");
-
+        Log.e("OnTouch", "s");
     }
 
     @Override
     public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-        Log.e("onInterceptTouchEvent","s");
-        mPopupWindow.showAsDropDown(getView());
-
+        Log.e("onInterceptTouchEvent", "s");
         return false;
     }
 
     @Override
     public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-        Log.e("onRequestDisallow","s");
+        Log.e("onRequestDisallow", "s");
 
     }
 
     @Override
     public void onRefresh() {
         new MsgTask.getMsg(getContext(), msgAdapter, swipe).execute(Settings.USERNAME);
+    }
+
+    @Override
+    public void itemClicked(View view, int position) {
+        Message row = messageList.getMsgList().get(position);
+        v1.setText(String.format("Sender: %s", row.getSender()));
+        v2.setText(String.format("Recipient: %s", row.getReceipt()));
+        v3.setText(String.format("Title: %s", row.getTitle()));
+        v4.setText(String.format("Content: %s", row.getContent()));
+        mPopupWindow.showAtLocation(view, Gravity.CENTER, 0, 300);
     }
 }
