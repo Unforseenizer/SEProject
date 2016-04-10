@@ -11,6 +11,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.example.desktop.project.MainActivity;
 import com.example.desktop.project.R;
 import com.example.desktop.project.Settings;
 
@@ -144,7 +145,8 @@ public class MsgTask {
 
             if (!(unread = messageList.fetchUnread()).isEmpty() && mContext != null && !messageList.isNotifyBit()) {
                 NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-                Intent intent2 = new Intent(mContext, MessageList.class);
+                Intent intent2 = new Intent(mContext, MainActivity.class);
+                intent2.putExtra("Fragment", "MsgFragment");
                 PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent2, 0);
                 long[] vib = {200, 200, 200, 200};
                 Notification notification = new Notification.Builder(mContext)
@@ -155,7 +157,7 @@ public class MsgTask {
                         .setContentIntent(pendingIntent)
                         .setLights(0xff0000ff, 100, 100)
                         .setVibrate(vib)
-                        .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                        .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM))
                         .build();
                 messageList.setNotify();
                 notificationManager.notify(1, notification);

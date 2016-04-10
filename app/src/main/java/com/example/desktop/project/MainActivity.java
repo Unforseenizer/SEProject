@@ -4,11 +4,13 @@ package com.example.desktop.project;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawer;
     ActionBarDrawerToggle toggle;
     NavigationView navigationView;
-
+Fragment fg;
     @Override
     protected void onStart() {
         super.onStart();
@@ -82,9 +84,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent5);
                 break;
             case R.id.nav_eventlist:
-                Fragment_category f1 = new Fragment_category();
-                if (!f1.isAdded()) {
-                    ft.replace(R.id.fragment_content, f1).commit();
+                fg = new Fragment_category();
+                if (!fg.isAdded()) {
+                    ft.replace(R.id.fragment_content, fg).commit();
                 }
                 break;
             case R.id.nav_logout:
@@ -94,8 +96,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 this.finish();
                 break;
             case R.id.nav_message:
-                MsgFragment msgFragment = new MsgFragment();
-                ft.replace(R.id.fragment_content, msgFragment).commit();
+                fg = new MsgFragment();
+                ft.replace(R.id.fragment_content, fg).commit();
                 break;
             default:
                 break;
@@ -103,5 +105,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // TODO Auto-generated method stub
+        if(fg instanceof MsgFragment){
+            MsgFragment.onKeyDown(keyCode, event);
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

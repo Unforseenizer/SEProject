@@ -1,8 +1,9 @@
 package com.example.desktop.msg;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Message {
+public class Message implements Serializable {
     private String Sender;
     private String Recipient;
     private String Title;
@@ -14,9 +15,6 @@ public class Message {
         Recipient = receipt;
         Title = title;
         Content = content;
-    }
-
-    public Message() {
     }
 
     public Timestamp getMsgTime() {

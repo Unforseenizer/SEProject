@@ -23,7 +23,7 @@ public class EventAdapter extends ArrayAdapter<Event> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
-        EventHolder holder = null;
+        EventHolder holder;
         Event item = getItem(position);
         if (row == null) {
             row = LayoutInflater.from(getContext()).inflate(ResourceId, null);
