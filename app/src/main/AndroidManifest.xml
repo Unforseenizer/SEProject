@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.desktop.project">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_app"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".register" />
+        <activity android:name=".register2" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".SettingActivity"
+            android:label="系統設定"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ProfileActivity"
+            android:label="個人設定"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme" />
+        <!--EVENT PART-->
+        <activity
+            android:name="com.example.desktop.event.Event_Edit"
+            android:label="Event_Edit"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.example.desktop.event.mapClick"
+            android:label="@string/title_activity_map_click"
+            android:parentActivityName="com.example.desktop.event.Event_Edit" />
+        <activity
+            android:name="com.example.desktop.event.Event_Join"
+            android:label="@string/title_activity_event__join"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name="com.example.desktop.event.EventResult"
+            android:label="Search Result"
+            android:parentActivityName=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <!--MESSAGE PART-->
+        <activity
+            android:name="com.example.desktop.msg.MsgCreate"
+            android:parentActivityName=".MainActivity" />
+        <service android:name="com.example.desktop.msg.MsgServices"/>
+        <receiver android:name="com.example.desktop.msg.ServReceiver">
+            <intent-filter>
+                <action android:name="MESSAGE_SERVICE" />
+            </intent-filter>
+        </receiver>
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCFhE3V4jRS1UIKgfWbUt-1rKWkq5hI0-w" />
+    </application>
+</manifest>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.desktop.event.Event_Edit">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp">
+
+        <TableRow>
+
+            <TextView
+                android:layout_weight="2"
+                android:text="Event name" />
+
+            <EditText
+                android:id="@+id/val_eventname"
+                android:layout_weight="3"
+                android:hint="Event Name" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_weight="2"
+                android:text="Location" />
+
+            <Button
+                android:id="@+id/val_location"
+                android:layout_weight="3"
+                android:text="Location" />
+        </TableRow>
+
+        <TableRow>
+
+            <EditText
+                android:id="@+id/val_eventdesc"
+                android:layout_weight="1"
+                android:hint="Desciption"
+                android:minLines="5" />
+        </TableRow>
+
+        <TableRow>
+            <Button
+                android:id="@+id/event_form_update"
+                android:layout_weight="1"
+                android:text="Update" />
+
+            <Button
+                android:id="@+id/event_form_delete"
+                android:layout_weight="1"
+                android:text="Delete" />
+        </TableRow>
+
+    </TableLayout>
+
+</android.support.design.widget.CoordinatorLayout>
