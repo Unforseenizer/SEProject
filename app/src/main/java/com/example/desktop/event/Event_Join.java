@@ -13,6 +13,8 @@ import com.example.desktop.project.R;
 import com.example.desktop.project.Settings;
 
 
+import java.util.ArrayList;
+
 public class Event_Join extends AppCompatActivity implements View.OnClickListener {
 
     TextView t1, t2, t3, t4, t5;
@@ -76,7 +78,11 @@ public class Event_Join extends AppCompatActivity implements View.OnClickListene
         t2.setText(dump.getEventDesc());
         t3.setText(dump.getEventTime().toString());
         t4.setText(dump.getOrigizator());
-        t5.setText(dump.getParticipant().toString());
+        ArrayList<String> arr = dump.getParticipant();
+        t5.setText("");
+        for (String i : arr) {
+            t5.append(i + "\n");
+        }
     }
 
     public void joinEvent() {

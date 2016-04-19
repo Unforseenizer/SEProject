@@ -32,4 +32,21 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
     </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User Name" />
+
+        <EditText
+            android:id="@+id/settings_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </TableRow>
+
 </TableLayout>
