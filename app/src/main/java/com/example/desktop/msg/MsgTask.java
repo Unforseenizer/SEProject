@@ -143,7 +143,8 @@ public class MsgTask {
                 adapter.notifyDataSetChanged();
             }
 
-            if (!(unread = messageList.fetchUnread()).isEmpty() && mContext != null && !messageList.isNotifyBit()) {
+            if (!(unread = messageList.fetchUnread()).isEmpty() && mContext != null && !messageList.isNotifyBit()&&Settings.IS_NOTIFY) {
+
                 NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
                 Intent intent2 = new Intent(mContext, MainActivity.class);
                 intent2.putExtra("Fragment", "MsgFragment");

@@ -14,7 +14,9 @@ import com.example.desktop.activity.SettingActivity;
 
 public class SettingActivityFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
     Communicator setchg;
-    EditText ipaddr;
+
+    EditText ipaddr, username;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -23,9 +25,14 @@ public class SettingActivityFragment extends Fragment implements CompoundButton.
         Switch switch1 = (Switch) view.findViewById(R.id.switch_notification);
         ipaddr = (EditText) view.findViewById(R.id.IPAddress);
 
+        username = (EditText) view.findViewById(R.id.settings_username);
+
+
         switch1.setChecked(SettingActivity.isNotification);
         switch1.setOnCheckedChangeListener(this);
         ipaddr.setText(Settings.IP_ADDRESS);
+
+        username.setText(Settings.USERNAME);
 
         return view;
     }
@@ -48,6 +55,10 @@ public class SettingActivityFragment extends Fragment implements CompoundButton.
     @Override
     public void onDestroyView() {
         Settings.IP_ADDRESS = ipaddr.getText().toString();
+<<<<<<< HEAD
+        Settings.USERNAME = username.getText().toString();
+=======
+>>>>>>> origin/master
         super.onDestroyView();
     }
 

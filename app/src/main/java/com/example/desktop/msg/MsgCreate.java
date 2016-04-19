@@ -40,5 +40,6 @@ public class MsgCreate extends AppCompatActivity implements View.OnClickListener
                 , title.getText().toString()
                 , content.getText().toString());
         new MsgTask.sendMsg().execute(output);
+        this.finish();
     }
 }

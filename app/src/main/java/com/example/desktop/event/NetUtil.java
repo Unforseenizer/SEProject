@@ -94,7 +94,6 @@ public class NetUtil {
             super.onPostExecute(res);
             pd.dismiss();
             Log.e("result", "onPostExecute");
-            ((Activity) mContext).finish();
             Toast.makeText(mContext, "Server REPLY : " + res, Toast.LENGTH_SHORT).show();
         }
     }

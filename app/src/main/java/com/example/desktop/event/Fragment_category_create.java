@@ -23,7 +23,6 @@ public class Fragment_category_create extends Fragment implements TimePickerFrag
     Event Editdump;
     int year, month, day, hour, min;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_category_create, null, false);
@@ -121,13 +120,22 @@ public class Fragment_category_create extends Fragment implements TimePickerFrag
 
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         this.year = year;
-        month = monthOfYear;
+month = monthOfYear+1;
         day = dayOfMonth;
+        datepick.setText(String.format("%s-%s-%s", day, month, year));
+
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         hour = hourOfDay;
-        min = minute;
+
+        min= minute;
+        String shour = "";
+        String smin = "";
+        shour = (String.valueOf(hour).length() == 1) ? 0 + String.valueOf(hour) : String.valueOf(hour);
+        smin = (String.valueOf(min).length() == 1) ? 0 + String.valueOf(min) : String.valueOf(hour);
+        timepick.setText(String.format("%s : %s", shour, smin));
+
     }
 }

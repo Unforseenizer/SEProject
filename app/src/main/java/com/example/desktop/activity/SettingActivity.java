@@ -26,9 +26,11 @@ public class SettingActivity extends AppCompatActivity implements SettingActivit
 
     public void respond(boolean config) {
         if (config) {
-            isNotification = true;
+
+            Settings.IS_NOTIFY = true;
         } else {
-            isNotification = false;
+            Settings.IS_NOTIFY = false;
+
         }
     }
 
