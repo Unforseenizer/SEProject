@@ -11,7 +11,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import com.example.desktop.project.MainActivity;
+import com.example.desktop.activity.MainActivity;
 import com.example.desktop.project.R;
 import com.example.desktop.project.Settings;
 

@@ -3,12 +3,10 @@ package com.example.desktop.project;
 import android.net.Uri;
 
 import com.example.desktop.event.Event;
+import com.example.desktop.event.EventAdapter;
 
 import java.util.ArrayList;
 
-/**
- * Created by Dudy on 28/2/2016.
- */
 public class Settings {
 
     public static final int REFRESH_INTERVAL = 3000;

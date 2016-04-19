@@ -1,8 +1,6 @@
 package com.example.desktop.msg;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.app.Service;
+import android.app.*;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.SystemClock;

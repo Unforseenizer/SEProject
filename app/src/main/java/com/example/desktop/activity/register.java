@@ -1,12 +1,14 @@
-package com.example.desktop.project;
+package com.example.desktop.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.*;
+
+
+import com.example.desktop.project.LoginDataBaseAdapter;
+import com.example.desktop.project.R;
 
 public class register extends Activity {
     LoginDataBaseAdapter loginDataBaseAdapter;

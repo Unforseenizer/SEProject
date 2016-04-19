@@ -1,4 +1,4 @@
-package com.example.desktop.project;
+package com.example.desktop.activity;
 
 
 import android.content.Intent;
@@ -19,6 +19,8 @@ import android.widget.Toast;
 import com.example.desktop.event.Fragment_category;
 import com.example.desktop.msg.MsgFragment;
 import com.example.desktop.msg.MsgServices;
+import com.example.desktop.project.R;
+import com.example.desktop.project.Settings;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 

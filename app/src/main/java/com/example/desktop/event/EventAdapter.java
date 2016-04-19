@@ -1,4 +1,4 @@
-package com.example.desktop.project;
+package com.example.desktop.event;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.desktop.event.Event;
+import com.example.desktop.project.R;
 
 import java.util.ArrayList;
 

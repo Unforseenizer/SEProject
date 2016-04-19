@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.example.desktop.activity.SettingActivity;
+
 public class SettingActivityFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
     Communicator setchg;
     EditText ipaddr;

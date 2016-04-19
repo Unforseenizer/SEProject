@@ -1,8 +1,6 @@
 package com.example.desktop.msg;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
+import android.content.*;
 
 public class ServReceiver extends BroadcastReceiver {
     @Override

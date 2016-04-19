@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.desktop.project.MainActivity;
+import com.example.desktop.activity.MainActivity;
 import com.example.desktop.project.R;
 
 public class Fragment_category extends Fragment {

@@ -3,10 +3,7 @@ package com.example.desktop.msg;
 import android.util.Log;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class MessageList {
     private static ArrayList<Message> msgList = new ArrayList<>();

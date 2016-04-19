@@ -1,9 +1,12 @@
-package com.example.desktop.project;
+package com.example.desktop.activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
+import com.example.desktop.project.R;
+import com.example.desktop.project.SettingActivityFragment;
 
 public class SettingActivity extends AppCompatActivity implements SettingActivityFragment.Communicator {
     public static boolean isNotification;

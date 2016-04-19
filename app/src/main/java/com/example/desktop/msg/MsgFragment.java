@@ -10,19 +10,11 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.example.desktop.project.MainActivity;
+import com.example.desktop.activity.MainActivity;
 import com.example.desktop.project.R;
 import com.example.desktop.project.Settings;
 

@@ -1,4 +1,4 @@
-package com.example.desktop.project;
+package com.example.desktop.activity;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -16,6 +16,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.desktop.project.LoginDataBaseAdapter;
+import com.example.desktop.project.R;
+import com.example.desktop.project.Settings;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     LoginDataBaseAdapter loginDataBaseAdapter;

@@ -1,13 +1,8 @@
 package com.example.desktop.event;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.view.InflateException;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v4.app.*;
+import android.view.*;
 
 import com.example.desktop.project.R;
 import com.example.desktop.project.Settings;
