@@ -131,10 +131,10 @@ month = monthOfYear+1;
         hour = hourOfDay;
 
         min= minute;
-        String shour = "";
-        String smin = "";
-        shour = (String.valueOf(hour).length() == 1) ? 0 + String.valueOf(hour) : String.valueOf(hour);
-        smin = (String.valueOf(min).length() == 1) ? 0 + String.valueOf(min) : String.valueOf(hour);
+        String shour = String.valueOf(hour);
+        String smin = String.valueOf(hour);
+        shour = (shour.length() == 1) ? 0 + shour : shour;
+        smin = (smin.length() == 1) ? 0 + smin : smin;
         timepick.setText(String.format("%s : %s", shour, smin));
 
     }

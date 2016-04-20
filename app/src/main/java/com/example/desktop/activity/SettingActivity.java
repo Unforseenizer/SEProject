@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.example.desktop.project.R;
 import com.example.desktop.project.SettingActivityFragment;
+import com.example.desktop.project.Settings;
 
 public class SettingActivity extends AppCompatActivity implements SettingActivityFragment.Communicator {
     public static boolean isNotification;

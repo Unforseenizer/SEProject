@@ -55,10 +55,8 @@ public class SettingActivityFragment extends Fragment implements CompoundButton.
     @Override
     public void onDestroyView() {
         Settings.IP_ADDRESS = ipaddr.getText().toString();
-<<<<<<< HEAD
         Settings.USERNAME = username.getText().toString();
-=======
->>>>>>> origin/master
+
         super.onDestroyView();
     }
 
