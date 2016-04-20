@@ -5,13 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +25,8 @@ import com.example.desktop.msg.MsgServices;
 import com.example.desktop.project.R;
 import com.example.desktop.project.Settings;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView username;
@@ -29,12 +34,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawer;
     ActionBarDrawerToggle toggle;
     NavigationView navigationView;
-Fragment fg;
+    Fragment fg;
+    FragmentTransaction ft;
+
     @Override
     protected void onStart() {
         super.onStart();
         Intent servIntent = new Intent(this, MsgServices.class);
         startService(servIntent);
+
+        ft = getSupportFragmentManager().beginTransaction();
+        MainFragment mf = new MainFragment();
+        ft.add(R.id.fragment_content, mf).commit();
     }
 
     @Override
@@ -75,7 +86,7 @@ Fragment fg;
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
-        android.support.v4.app.FragmentTransaction ft = (android.support.v4.app.FragmentTransaction) getSupportFragmentManager().beginTransaction();
+        ft = getSupportFragmentManager().beginTransaction();
         switch (item.getItemId()) {
             case R.id.nav_main:
                 Intent intent1 = new Intent(MainActivity.this, ProfileActivity.class);
@@ -112,9 +123,34 @@ Fragment fg;
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // TODO Auto-generated method stub
-        if(fg instanceof MsgFragment){
+        Log.i("Activity","KeyDown");
+        if (fg instanceof MsgFragment) {
             MsgFragment.onKeyDown(keyCode, event);
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    //Implement Passing Method to Fragment
+    private ArrayList<MyOnTouchListener> onTouchListeners = new ArrayList<>(
+            10);
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        for (MyOnTouchListener listener : onTouchListeners) {
+            listener.onTouch(ev);
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    public void registerMyOnTouchListener(MyOnTouchListener myOnTouchListener) {
+        onTouchListeners.add(myOnTouchListener);
+    }
+
+    public void unregisterMyOnTouchListener(MyOnTouchListener myOnTouchListener) {
+        onTouchListeners.remove(myOnTouchListener);
+    }
+
+    public interface MyOnTouchListener {
+        public boolean onTouch(MotionEvent ev);
     }
 }
