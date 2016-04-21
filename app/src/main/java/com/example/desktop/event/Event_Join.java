@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.example.desktop.project.R;
 import com.example.desktop.project.Settings;
 
-
 import java.util.ArrayList;
 
 public class Event_Join extends AppCompatActivity implements View.OnClickListener {

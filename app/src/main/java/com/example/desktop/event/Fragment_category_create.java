@@ -9,7 +9,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.desktop.project.R;
 import com.example.desktop.project.Settings;
@@ -120,7 +124,7 @@ public class Fragment_category_create extends Fragment implements TimePickerFrag
 
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         this.year = year;
-month = monthOfYear+1;
+        month = monthOfYear + 1;
         day = dayOfMonth;
         datepick.setText(String.format("%s-%s-%s", day, month, year));
 
@@ -130,7 +134,7 @@ month = monthOfYear+1;
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         hour = hourOfDay;
 
-        min= minute;
+        min = minute;
         String shour = String.valueOf(hour);
         String smin = String.valueOf(hour);
         shour = (shour.length() == 1) ? 0 + shour : shour;

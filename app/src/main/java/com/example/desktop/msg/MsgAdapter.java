@@ -49,6 +49,10 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.MsgHolder> {
         return data == null ? 0 : data.size();
     }
 
+    public interface ClickListener {
+        public void itemClicked(View view, int position);
+    }
+
     class MsgHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView sender, title, time;
 
@@ -67,10 +71,5 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.MsgHolder> {
             }
 
         }
-    }
-
-
-    public interface ClickListener {
-        public void itemClicked(View view, int position);
     }
 }

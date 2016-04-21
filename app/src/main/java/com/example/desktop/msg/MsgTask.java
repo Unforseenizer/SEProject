@@ -48,7 +48,7 @@ public class MsgTask {
                 URL url = new URL(path);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
-                conn.setConnectTimeout(10000);
+                conn.setConnectTimeout(2000);
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
                 conn.connect();
@@ -72,7 +72,6 @@ public class MsgTask {
                 reply = "";
                 while ((reply += in.readLine()) != null && in.ready()) ;
             } catch (Exception e) {
-                e.printStackTrace();
             }
             return reply;
         }
@@ -107,7 +106,7 @@ public class MsgTask {
                 URL url = new URL(path);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
-                conn.setConnectTimeout(10000);
+                conn.setConnectTimeout(2000);
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
                 conn.connect();
@@ -129,7 +128,6 @@ public class MsgTask {
                 }
                 messageList.setMsgList(msgList);
             } catch (Exception e) {
-                e.printStackTrace();
             }
             return null;
         }
@@ -143,7 +141,7 @@ public class MsgTask {
                 adapter.notifyDataSetChanged();
             }
 
-            if (!(unread = messageList.fetchUnread()).isEmpty() && mContext != null && !messageList.isNotifyBit()&&Settings.IS_NOTIFY) {
+            if (!(unread = messageList.fetchUnread()).isEmpty() && mContext != null && !messageList.isNotifyBit() && Settings.IS_NOTIFY) {
 
                 NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
                 Intent intent2 = new Intent(mContext, MainActivity.class);

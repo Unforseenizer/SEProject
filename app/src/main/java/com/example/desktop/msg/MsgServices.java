@@ -1,6 +1,8 @@
 package com.example.desktop.msg;
 
-import android.app.*;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.SystemClock;
@@ -30,7 +32,6 @@ public class MsgServices extends Service {
         Intent intent1 = new Intent("MESSAGE_SERVICE");
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent1, 0);
         manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, trigger, pendingIntent);
-        Log.e("SERVICE", "START");
         return super.onStartCommand(intent, flags, startId);
     }
 }

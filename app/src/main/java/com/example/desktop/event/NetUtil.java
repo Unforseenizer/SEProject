@@ -1,20 +1,25 @@
 package com.example.desktop.event;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.desktop.project.R;
 import com.example.desktop.project.Settings;
 
-import org.json.*;
-import java.io.*;
-import java.net.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.EOFException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class NetUtil {
@@ -55,7 +60,7 @@ public class NetUtil {
                 URL url = new URL(path);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
-                conn.setConnectTimeout(10000);
+                conn.setConnectTimeout(2000);
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
                 out = new DataOutputStream(conn.getOutputStream());
@@ -73,18 +78,14 @@ public class NetUtil {
                 sb.append("&org=");
                 sb.append(URLEncoder.encode(org, "UTF-8"));
                 String str = new String(sb.toString());
-                Log.e("POST", str);
                 out.writeBytes(str);
                 out.flush();
                 out.close();
-                Log.e("test", str);
+
                 in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
                 str2 = "";
                 while ((str2 += in.readLine()) != null && in.ready()) ;
-            } catch (EOFException ex) {
-
-            } catch (Exception e) {
-                e.printStackTrace();
+            }  catch (Exception e) {
             }
             return str2;
         }
@@ -93,7 +94,6 @@ public class NetUtil {
         protected void onPostExecute(String res) {
             super.onPostExecute(res);
             pd.dismiss();
-            Log.e("result", "onPostExecute");
             Toast.makeText(mContext, "Server REPLY : " + res, Toast.LENGTH_SHORT).show();
         }
     }
@@ -124,17 +124,16 @@ public class NetUtil {
                 URL url = new URL(path);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
-                conn.setConnectTimeout(10000);
+                conn.setConnectTimeout(2000);
                 conn.setDoInput(true);
 
                 in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
                 while ((rawData += in.readLine()) != null && in.ready()) ;
                 JSONArray arr = new JSONArray(rawData);
                 Settings.EventHoldList = new ArrayList<Event>();
-                Log.e("JSON length", String.valueOf(arr.length()));
+
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject o = arr.getJSONObject(i);
-                    Log.e("JSON", o.toString());
                     Event evt = new Event(o.getString("evtName"), o.getString("evtDesc"));
                     if (!o.getString("participant").isEmpty() && o.getString("participant") != null)
                         evt.setParticipant(o.getString("participant"));
@@ -145,10 +144,7 @@ public class NetUtil {
                     Settings.EventHoldList.add(evt);
                     //  PD.dismiss();
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
+            }  catch (Exception e) {
             }
             //  parseJSON(rawData);
             return null;
@@ -186,7 +182,6 @@ public class NetUtil {
         @Override
         protected String doInBackground(Event... params) {
             create_time = params[0].getCREATE_TIME();
-            Log.e("AsyncTask : ", create_time);
             String path = "http://" + Settings.IP_ADDRESS + "/deleteEvent.php";
             BufferedReader in;
             DataOutputStream out;
@@ -194,7 +189,7 @@ public class NetUtil {
                 URL url = new URL(path);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
-                conn.setConnectTimeout(10000);
+                conn.setConnectTimeout(2000);
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
                 out = new DataOutputStream(conn.getOutputStream());
@@ -202,18 +197,14 @@ public class NetUtil {
                 sb.append("ctime=");
                 sb.append(URLEncoder.encode(create_time, "UTF-8"));
                 String str = new String(sb.toString());
-
                 out.writeBytes(str);
                 out.flush();
                 out.close();
-                Log.e("test", str);
-
                 in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
                 str2 = "";
                 while ((str2 += in.readLine()) != null && in.ready()) ;
             } catch (EOFException ex) {
             } catch (Exception e) {
-                e.printStackTrace();
             }
             return str2;
         }
@@ -252,7 +243,7 @@ public class NetUtil {
                 URL url = new URL(path);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
-                conn.setConnectTimeout(10000);
+                conn.setConnectTimeout(2000);
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
                 out = new DataOutputStream(conn.getOutputStream());
@@ -277,15 +268,10 @@ public class NetUtil {
                 out.writeBytes(str);
                 out.flush();
                 out.close();
-                Log.e("update stage post", str);
                 in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
                 str2 = "";
                 while ((str2 += in.readLine()) != null && in.ready()) ;
-                Log.e("update server reply", str2);
-            } catch (EOFException ex) {
-
             } catch (Exception e) {
-                e.printStackTrace();
             }
             return str2;
         }
@@ -296,7 +282,6 @@ public class NetUtil {
             Settings.adapter.addAll(Settings.EventHoldList);
             Settings.adapter.notifyDataSetChanged();
             super.onPostExecute(res);
-            Log.e("result", "onPostExecute");
             Toast.makeText(mContext, "Server REPLY : " + res, Toast.LENGTH_SHORT).show();
         }
     }

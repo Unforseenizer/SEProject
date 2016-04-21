@@ -37,15 +37,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Fragment fg;
     FragmentTransaction ft;
 
+    Intent servIntent;
+    //Implement Passing Method to Fragment
+    ArrayList<MyOnTouchListener> onTouchListeners = new ArrayList<>(10);
+
+    static final String TAG = "Main Activity";
+
     @Override
     protected void onStart() {
         super.onStart();
-        Intent servIntent = new Intent(this, MsgServices.class);
+        Log.e(TAG, "onStart");
+        servIntent = new Intent(this, MsgServices.class);
         startService(servIntent);
-
         ft = getSupportFragmentManager().beginTransaction();
-        MainFragment mf = new MainFragment();
-        ft.add(R.id.fragment_content, mf).commit();
+        inflateHome();
     }
 
     @Override
@@ -72,6 +77,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         username.setText(Settings.USERNAME);
     }
 
+    public void inflateHome(){
+        fg = new MainFragment();
+        ft.replace(R.id.fragment_content, fg).commit();
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -87,7 +96,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
 
         ft = getSupportFragmentManager().beginTransaction();
+        ft.disallowAddToBackStack();
         switch (item.getItemId()) {
+            case R.id.nav_home:
+                ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
+                inflateHome();
+                break;
             case R.id.nav_main:
                 Intent intent1 = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent1);
@@ -97,8 +111,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent5);
                 break;
             case R.id.nav_eventlist:
-                fg = new Fragment_category();
-                if (!fg.isAdded()) {
+                if (!(fg instanceof Fragment_category)) {
+                    fg = new Fragment_category();
+                    ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
                     ft.replace(R.id.fragment_content, fg).commit();
                 }
                 break;
@@ -106,10 +121,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 Toast.makeText(MainActivity.this, "Logout Sucessful.", Toast.LENGTH_SHORT);
                 startActivity(intent);
+                stopService(servIntent);
                 this.finish();
                 break;
             case R.id.nav_message:
                 fg = new MsgFragment();
+                ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
                 ft.replace(R.id.fragment_content, fg).commit();
                 break;
             default:
@@ -123,16 +140,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // TODO Auto-generated method stub
-        Log.i("Activity","KeyDown");
+        Log.i("Activity", "KeyDown");
         if (fg instanceof MsgFragment) {
             MsgFragment.onKeyDown(keyCode, event);
         }
         return super.onKeyDown(keyCode, event);
     }
-
-    //Implement Passing Method to Fragment
-    private ArrayList<MyOnTouchListener> onTouchListeners = new ArrayList<>(
-            10);
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -152,5 +165,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public interface MyOnTouchListener {
         public boolean onTouch(MotionEvent ev);
+
     }
+
+    @Override
+    public void onDetachedFromWindow() {
+        Log.e(TAG, "onDetachedFromWindow");
+        if (fg != null) {
+            Log.e(TAG, fg.toString());
+        }
+        super.onDetachedFromWindow();
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.e(TAG, "onDestroy");
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStop() {
+        Log.e(TAG, "onStop");
+        super.onStop();
+    }
+
+    @Override
+    protected void onPause() {
+        Log.e(TAG, "onPause");
+        super.onPause();
+    }
+
+    @Override
+    protected void onRestart() {
+        Log.e(TAG, "onRestart");
+        super.onRestart();
+    }
+
 }

@@ -3,7 +3,10 @@ package com.example.desktop.msg;
 import android.util.Log;
 
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class MessageList {
     private static ArrayList<Message> msgList = new ArrayList<>();
@@ -39,8 +42,6 @@ public class MessageList {
             if (unread.size() > oldSize)
                 NOTIFY_BIT = false;
         }
-        Log.e("UNREAD", String.valueOf(msgList.size()));
-        Log.e("UNREAD", String.valueOf(NOTIFY_BIT));
         return unread;
     }
 
@@ -56,7 +57,6 @@ public class MessageList {
         }
         unread.clear();
         NOTIFY_BIT = false;
-        Log.e("Clear Unread", timestamp.toString());
     }
 
     public void setNotify() {

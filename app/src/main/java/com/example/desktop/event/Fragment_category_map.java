@@ -1,8 +1,13 @@
 package com.example.desktop.event;
 
 import android.os.Bundle;
-import android.support.v4.app.*;
-import android.view.*;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.view.InflateException;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.desktop.project.R;
 import com.example.desktop.project.Settings;
@@ -52,7 +57,7 @@ public class Fragment_category_map extends Fragment implements OnMapReadyCallbac
 
     @Override
     public void onStart() {
-        SupportMapFragment mapFragment = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.frag_map));
+        mapFragment = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.frag_map));
         if (mapFragment != null) {
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
             ft.attach(mapFragment);
@@ -63,19 +68,14 @@ public class Fragment_category_map extends Fragment implements OnMapReadyCallbac
 
     @Override
     public void onPause() {
-        killOldMap();
+        mapFragment = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.frag_map));
+        if (mapFragment != null) {
+            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+            ft.detach(mapFragment).commit();
+        }
         mMap = null;
         mapFragment = null;
         super.onPause();
-    }
-
-    private void killOldMap() {
-        SupportMapFragment mapFragment = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.frag_map));
-        if (mapFragment != null) {
-            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-            ft.detach(mapFragment);
-            ft.commit();
-        }
     }
 
     public View getView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

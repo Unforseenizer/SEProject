@@ -1,5 +1,6 @@
 package com.example.desktop.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,9 +18,10 @@ import com.example.desktop.project.R;
 
 public class MainFragment extends Fragment implements GestureDetector.OnGestureListener {
 
+    static final String TAG = "Main Fragment";
     ViewFlipper switcher;
     GestureDetector detector;
-
+    MainActivity.MyOnTouchListener myOnTouchListener;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -27,7 +29,7 @@ public class MainFragment extends Fragment implements GestureDetector.OnGestureL
         switcher = (ViewFlipper) root.findViewById(R.id.switcher);
         detector = new GestureDetector(
                 getActivity(), this);
-        MainActivity.MyOnTouchListener myOnTouchListener = new MainActivity.MyOnTouchListener() {
+         myOnTouchListener = new MainActivity.MyOnTouchListener() {
             @Override
             public boolean onTouch(MotionEvent ev) {
                 boolean result = detector.onTouchEvent(ev);
@@ -79,7 +81,49 @@ public class MainFragment extends Fragment implements GestureDetector.OnGestureL
             switcher.setInAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.push_right_in));
             switcher.showPrevious();
         }
-
         return false;
+    }
+
+    @Override
+    public void onDetach() {
+        Log.e(TAG,"onDetach");
+        ((MainActivity) getActivity()).unregisterMyOnTouchListener(myOnTouchListener);
+        super.onDetach();
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.e(TAG,"onDestroy");
+        super.onDestroy();
+    }
+
+    @Override
+    public void onDestroyView() {
+        Log.e(TAG,"onDestroyView");
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onStart() {
+        Log.e(TAG,"onStart");
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        Log.e(TAG,"onResume");
+        super.onResume();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        Log.e(TAG,"onAttach");
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        Log.e(TAG,"onViewCreated");
+        super.onViewCreated(view, savedInstanceState);
     }
 }

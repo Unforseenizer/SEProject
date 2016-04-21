@@ -10,7 +10,15 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.*;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -23,12 +31,23 @@ import java.util.List;
 
 public class MsgFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, RecyclerView.OnItemTouchListener, MsgAdapter.ClickListener {
     static View root;
-    RecyclerView recyclerView;
     static PopupWindow mPopupWindow;
+    RecyclerView recyclerView;
     SwipeRefreshLayout swipe;
     MsgAdapter msgAdapter;
     MessageList messageList = new MessageList();
     TextView v1, v2, v3, v4;
+
+    static final String TAG ="MsgFragment";
+    public static boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU && event.getRepeatCount() == 0) {
+            if (mPopupWindow != null && !mPopupWindow.isShowing()) {
+                mPopupWindow.showAtLocation(root.findViewById(R.id.recycler), Gravity.BOTTOM, 0, 0);
+            }
+            return true;
+        }
+        return true;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,16 +96,6 @@ public class MsgFragment extends Fragment implements SwipeRefreshLayout.OnRefres
                 return false;
             }
         });
-    }
-
-    public static boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_MENU && event.getRepeatCount() == 0) {
-            if (mPopupWindow != null && !mPopupWindow.isShowing()) {
-                mPopupWindow.showAtLocation(root.findViewById(R.id.recycler), Gravity.BOTTOM, 0, 0);
-            }
-            return true;
-        }
-        return true;
     }
 
     @Override
@@ -158,5 +167,22 @@ public class MsgFragment extends Fragment implements SwipeRefreshLayout.OnRefres
         v3.setText(String.format("Title: %s", row.getTitle()));
         v4.setText(String.format("Content: %s", row.getContent()));
         mPopupWindow.showAtLocation(view, Gravity.CENTER, 0, 300);
+    }
+    @Override
+    public void onDetach() {
+        Log.e(TAG,"onDetach");
+        super.onDetach();
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.e(TAG,"onDestroy");
+        super.onDestroy();
+    }
+
+    @Override
+    public void onDestroyView() {
+        Log.e(TAG,"onDestroyView");
+        super.onDestroyView();
     }
 }

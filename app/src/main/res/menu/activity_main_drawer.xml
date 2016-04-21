@@ -2,7 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-            <item android:id="@+id/nav_main" android:icon="@android:drawable/ic_dialog_info"
+        <item android:id="@+id/nav_home" android:icon="@android:drawable/ic_menu_week"
+            android:title="Home Page"/>
+            <item android:id="@+id/nav_main" android:icon="@android:drawable/ic_menu_info_details"
             android:title="My profile"/>
         <item android:id="@+id/nav_message" android:icon="@android:drawable/ic_dialog_email"
             android:title="Message" />
