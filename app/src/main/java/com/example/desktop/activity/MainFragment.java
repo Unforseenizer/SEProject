@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,7 @@ public class MainFragment extends Fragment implements GestureDetector.OnGestureL
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_mainactivity, null);
+        setHasOptionsMenu(true);
         switcher = (ViewFlipper) root.findViewById(R.id.switcher);
         detector = new GestureDetector(
                 getActivity(), this);
@@ -40,6 +43,12 @@ public class MainFragment extends Fragment implements GestureDetector.OnGestureL
 
         ((MainActivity) getActivity()).registerMyOnTouchListener(myOnTouchListener);
         return root;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override

@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.widget.ImageView;
@@ -29,7 +30,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    static final String TAG = "Main Activity";
+    static final String TAG = "Home Page";
     TextView username;
     Toolbar toolbar;
     DrawerLayout drawer;
@@ -99,8 +100,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ft.disallowAddToBackStack();
         switch (item.getItemId()) {
             case R.id.nav_home:
-                ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
-                inflateHome();
+                if (!(fg instanceof MainFragment)) {
+                    ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
+                    getSupportActionBar().setTitle(TAG);
+                    inflateHome();
+                }
                 break;
             case R.id.nav_main:
                 Intent intent1 = new Intent(MainActivity.this, ProfileActivity.class);
@@ -135,6 +139,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.clear();
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override

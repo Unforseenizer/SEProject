@@ -67,6 +67,7 @@ public class Fragment_category_eventList extends Fragment implements SwipeRefres
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
         inflater.inflate(R.menu.event_search, menu);
         setupSearch(menu);
     }
