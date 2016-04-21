@@ -45,10 +45,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onStart() {
         super.onStart();
         Log.e(TAG, "onStart");
-        servIntent = new Intent(this, MsgServices.class);
-        startService(servIntent);
-        ft = getSupportFragmentManager().beginTransaction();
-        inflateHome();
     }
 
     @Override
@@ -66,6 +62,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         getSupportActionBar().setTitle("Home Page");
         updateDrawer();
+
+        servIntent = new Intent(this, MsgServices.class);
+        startService(servIntent);
+        ft = getSupportFragmentManager().beginTransaction();
+        inflateHome();
     }
 
     public void updateDrawer() {

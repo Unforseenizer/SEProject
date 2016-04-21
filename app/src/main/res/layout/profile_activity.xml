@@ -6,6 +6,7 @@
     tools:context="com.example.desktop.activity.ProfileActivity">
 
     <include layout="@layout/app_bar" />
+
     <include layout="@layout/profile_content" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -2,17 +2,29 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_home" android:icon="@android:drawable/ic_menu_week"
-            android:title="Home Page"/>
-            <item android:id="@+id/nav_main" android:icon="@android:drawable/ic_menu_info_details"
-            android:title="My profile"/>
-        <item android:id="@+id/nav_message" android:icon="@android:drawable/ic_dialog_email"
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@android:drawable/ic_menu_week"
+            android:title="Home Page" />
+        <item
+            android:id="@+id/nav_main"
+            android:icon="@android:drawable/ic_menu_info_details"
+            android:title="My profile" />
+        <item
+            android:id="@+id/nav_message"
+            android:icon="@android:drawable/ic_dialog_email"
             android:title="Message" />
-        <item android:id="@+id/nav_eventlist" android:icon="@android:drawable/ic_dialog_map"
+        <item
+            android:id="@+id/nav_eventlist"
+            android:icon="@android:drawable/ic_dialog_map"
             android:title="Event" />
-        <item android:id="@+id/nav_setting" android:icon="@android:drawable/ic_menu_manage"
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@android:drawable/ic_menu_manage"
             android:title="Setting" />
-        <item android:id="@+id/nav_logout" android:icon="@android:drawable/ic_secure"
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@android:drawable/ic_secure"
             android:title="Logout" />
     </group>
 </menu>

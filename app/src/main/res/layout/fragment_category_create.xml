@@ -64,8 +64,8 @@
 
         <EditText
             android:id="@+id/create_eventdesc"
-            android:layout_weight="1"
             android:layout_span="2"
+            android:layout_weight="1"
 
             android:hint="Desciption"
             android:minLines="5" />

@@ -6,7 +6,7 @@
     android:fitsSystemWindows="true"
     tools:context="com.example.desktop.activity.SettingActivity">
 
- <include layout="@layout/app_bar" />
+    <include layout="@layout/app_bar" />
 
     <include layout="@layout/setting_content" />
 

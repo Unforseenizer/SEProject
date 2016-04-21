@@ -1,30 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<ViewFlipper
-    android:id="@+id/switcher"
     android:layout_width="match_parent"
-    android:layout_height="240dp"
-    android:persistentDrawingCache="animation"
-    android:flipInterval="3000"
-    android:outAnimation="@android:anim/fade_out"
-    android:inAnimation="@android:anim/fade_in">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <ImageView
+    <ViewFlipper
+        android:id="@+id/switcher"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" android:src="@drawable/s4" />
+        android:layout_height="240dp"
+        android:flipInterval="3000"
+        android:inAnimation="@android:anim/fade_in"
+        android:outAnimation="@android:anim/fade_out"
+        android:persistentDrawingCache="animation">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" android:src="@drawable/s1"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/s4" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" android:src="@drawable/s2"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/s1" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" android:src="@drawable/s3"/>
-</ViewFlipper>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/s2" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/s3" />
+    </ViewFlipper>
 </RelativeLayout>

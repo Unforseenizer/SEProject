@@ -1,8 +1,8 @@
 package com.example.desktop.event;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.InflateException;
 import android.view.LayoutInflater;
@@ -21,24 +21,24 @@ public class Fragment_category_map extends Fragment implements OnMapReadyCallbac
     public static SupportMapFragment mapFragment;
     private GoogleMap mMap;
     private View root;
+    FragmentTransaction fragmentTransaction;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         getView(inflater, container, savedInstanceState);
-
         if (mapFragment == null) {
-            try {
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                mapFragment = SupportMapFragment.newInstance();
-                fragmentTransaction.replace(R.id.frag_map, mapFragment).commit();
-                mapFragment.getMapAsync(this);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            fragmentTransaction = getFragmentManager().beginTransaction();
+            mapFragment = SupportMapFragment.newInstance();
+            fragmentTransaction.replace(R.id.frag_map, mapFragment).commit();
         }
         return root;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mapFragment.getMapAsync(this);
     }
 
     @Override
@@ -59,9 +59,9 @@ public class Fragment_category_map extends Fragment implements OnMapReadyCallbac
     public void onStart() {
         mapFragment = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.frag_map));
         if (mapFragment != null) {
-            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-            ft.attach(mapFragment);
-            ft.commit();
+            fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.attach(mapFragment).commit();
+            mapFragment.getMapAsync(this);
         }
         super.onStart();
     }
@@ -70,8 +70,8 @@ public class Fragment_category_map extends Fragment implements OnMapReadyCallbac
     public void onPause() {
         mapFragment = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.frag_map));
         if (mapFragment != null) {
-            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-            ft.detach(mapFragment).commit();
+            fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.detach(mapFragment).commit();
         }
         mMap = null;
         mapFragment = null;

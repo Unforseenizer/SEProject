@@ -59,6 +59,7 @@
         </TableRow>
 
         <TableRow>
+
             <Button
                 android:id="@+id/event_form_update"
                 android:layout_weight="1"
