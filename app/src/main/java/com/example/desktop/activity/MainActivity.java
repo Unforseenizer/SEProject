@@ -29,6 +29,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    static final String TAG = "Main Activity";
     TextView username;
     Toolbar toolbar;
     DrawerLayout drawer;
@@ -36,12 +37,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     Fragment fg;
     FragmentTransaction ft;
-
     Intent servIntent;
     //Implement Passing Method to Fragment
     ArrayList<MyOnTouchListener> onTouchListeners = new ArrayList<>(10);
-
-    static final String TAG = "Main Activity";
 
     @Override
     protected void onStart() {
@@ -77,10 +75,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         username.setText(Settings.USERNAME);
     }
 
-    public void inflateHome(){
+    public void inflateHome() {
         fg = new MainFragment();
         ft.replace(R.id.fragment_content, fg).commit();
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -163,11 +162,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         onTouchListeners.remove(myOnTouchListener);
     }
 
-    public interface MyOnTouchListener {
-        public boolean onTouch(MotionEvent ev);
-
-    }
-
     @Override
     public void onDetachedFromWindow() {
         Log.e(TAG, "onDetachedFromWindow");
@@ -199,6 +193,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onRestart() {
         Log.e(TAG, "onRestart");
         super.onRestart();
+    }
+
+    public interface MyOnTouchListener {
+        public boolean onTouch(MotionEvent ev);
+
     }
 
 }

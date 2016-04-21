@@ -30,6 +30,7 @@ import java.util.List;
 
 
 public class MsgFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, RecyclerView.OnItemTouchListener, MsgAdapter.ClickListener {
+    static final String TAG = "MsgFragment";
     static View root;
     static PopupWindow mPopupWindow;
     RecyclerView recyclerView;
@@ -38,7 +39,6 @@ public class MsgFragment extends Fragment implements SwipeRefreshLayout.OnRefres
     MessageList messageList = new MessageList();
     TextView v1, v2, v3, v4;
 
-    static final String TAG ="MsgFragment";
     public static boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_MENU && event.getRepeatCount() == 0) {
             if (mPopupWindow != null && !mPopupWindow.isShowing()) {
@@ -168,21 +168,22 @@ public class MsgFragment extends Fragment implements SwipeRefreshLayout.OnRefres
         v4.setText(String.format("Content: %s", row.getContent()));
         mPopupWindow.showAtLocation(view, Gravity.CENTER, 0, 300);
     }
+
     @Override
     public void onDetach() {
-        Log.e(TAG,"onDetach");
+        Log.e(TAG, "onDetach");
         super.onDetach();
     }
 
     @Override
     public void onDestroy() {
-        Log.e(TAG,"onDestroy");
+        Log.e(TAG, "onDestroy");
         super.onDestroy();
     }
 
     @Override
     public void onDestroyView() {
-        Log.e(TAG,"onDestroyView");
+        Log.e(TAG, "onDestroyView");
         super.onDestroyView();
     }
 }

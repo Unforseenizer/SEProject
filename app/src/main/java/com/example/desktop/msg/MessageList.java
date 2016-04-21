@@ -1,7 +1,5 @@
 package com.example.desktop.msg;
 
-import android.util.Log;
-
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;

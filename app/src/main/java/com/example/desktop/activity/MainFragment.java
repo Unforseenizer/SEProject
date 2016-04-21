@@ -22,6 +22,7 @@ public class MainFragment extends Fragment implements GestureDetector.OnGestureL
     ViewFlipper switcher;
     GestureDetector detector;
     MainActivity.MyOnTouchListener myOnTouchListener;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class MainFragment extends Fragment implements GestureDetector.OnGestureL
         switcher = (ViewFlipper) root.findViewById(R.id.switcher);
         detector = new GestureDetector(
                 getActivity(), this);
-         myOnTouchListener = new MainActivity.MyOnTouchListener() {
+        myOnTouchListener = new MainActivity.MyOnTouchListener() {
             @Override
             public boolean onTouch(MotionEvent ev) {
                 boolean result = detector.onTouchEvent(ev);
@@ -86,44 +87,44 @@ public class MainFragment extends Fragment implements GestureDetector.OnGestureL
 
     @Override
     public void onDetach() {
-        Log.e(TAG,"onDetach");
+        Log.e(TAG, "onDetach");
         ((MainActivity) getActivity()).unregisterMyOnTouchListener(myOnTouchListener);
         super.onDetach();
     }
 
     @Override
     public void onDestroy() {
-        Log.e(TAG,"onDestroy");
+        Log.e(TAG, "onDestroy");
         super.onDestroy();
     }
 
     @Override
     public void onDestroyView() {
-        Log.e(TAG,"onDestroyView");
+        Log.e(TAG, "onDestroyView");
         super.onDestroyView();
     }
 
     @Override
     public void onStart() {
-        Log.e(TAG,"onStart");
+        Log.e(TAG, "onStart");
         super.onStart();
     }
 
     @Override
     public void onResume() {
-        Log.e(TAG,"onResume");
+        Log.e(TAG, "onResume");
         super.onResume();
     }
 
     @Override
     public void onAttach(Context context) {
-        Log.e(TAG,"onAttach");
+        Log.e(TAG, "onAttach");
         super.onAttach(context);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        Log.e(TAG,"onViewCreated");
+        Log.e(TAG, "onViewCreated");
         super.onViewCreated(view, savedInstanceState);
     }
 }

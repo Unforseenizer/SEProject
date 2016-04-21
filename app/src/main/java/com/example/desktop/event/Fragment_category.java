@@ -16,11 +16,11 @@ import com.example.desktop.project.R;
 
 public class Fragment_category extends Fragment {
 
+    static final String TAG = "Event Fragment";
     private ViewPager mViewPager;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private TabLayout tabLayout;
 
-    static final String TAG = "Event Fragment";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_category, null);
@@ -35,6 +35,24 @@ public class Fragment_category extends Fragment {
         tabLayout.setupWithViewPager(mViewPager);
 
         return root;
+    }
+
+    @Override
+    public void onDetach() {
+        Log.e(TAG, "onDetach");
+        super.onDetach();
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.e(TAG, "onDestroy");
+        super.onDestroy();
+    }
+
+    @Override
+    public void onDestroyView() {
+        Log.e(TAG, "onDestroyView");
+        super.onDestroyView();
     }
 
     public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
@@ -74,22 +92,5 @@ public class Fragment_category extends Fragment {
             }
             return null;
         }
-    }
-    @Override
-    public void onDetach() {
-        Log.e(TAG,"onDetach");
-        super.onDetach();
-    }
-
-    @Override
-    public void onDestroy() {
-        Log.e(TAG,"onDestroy");
-        super.onDestroy();
-    }
-
-    @Override
-    public void onDestroyView() {
-        Log.e(TAG,"onDestroyView");
-        super.onDestroyView();
     }
 }

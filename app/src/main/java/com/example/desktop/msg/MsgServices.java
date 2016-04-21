@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.example.desktop.project.Settings;
 

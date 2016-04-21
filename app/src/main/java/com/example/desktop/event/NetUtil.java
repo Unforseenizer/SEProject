@@ -85,7 +85,7 @@ public class NetUtil {
                 in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
                 str2 = "";
                 while ((str2 += in.readLine()) != null && in.ready()) ;
-            }  catch (Exception e) {
+            } catch (Exception e) {
             }
             return str2;
         }
@@ -144,7 +144,7 @@ public class NetUtil {
                     Settings.EventHoldList.add(evt);
                     //  PD.dismiss();
                 }
-            }  catch (Exception e) {
+            } catch (Exception e) {
             }
             //  parseJSON(rawData);
             return null;
