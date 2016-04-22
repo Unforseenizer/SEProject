@@ -5,12 +5,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Toast;
+import android.widget.*;
 
 import com.example.desktop.project.LoginDataBaseAdapter;
 import com.example.desktop.project.R;
@@ -47,7 +45,11 @@ public class register2 extends Activity {
         btnCreateAccount.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-
+                if (firstName == null || lastName == null || bYear == null || bMonth == null || bDay == null || SexGroup == null || eMail == null)
+                {
+                    Toast.makeText(register2.this, "Please fill in your information", Toast.LENGTH_SHORT);
+                    return;
+                }
                 String FirstName = firstName.getText().toString();
                 String LastName = lastName.getText().toString();
                 String FBirthday = bYear.getText().toString() + bMonth.getText().toString() + bDay.getText().toString();
@@ -70,8 +72,13 @@ public class register2 extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         register2.this.finish();
-                        Intent intent = new Intent(register2.this, MainActivity.class);
+                        /*Intent intent = new Intent(register2.this, MainActivity.class);
                         Toast.makeText(register2.this, "Complete", Toast.LENGTH_SHORT);
+                        startActivity(intent);*/
+                        Toast.makeText(register2.this, "Please login your registered account", Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }
                 });
