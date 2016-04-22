@@ -54,6 +54,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.loginshortcut:
                 Intent shortcut = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(shortcut);
+                finish();
                 break;
             case R.id.login:
                 final EditText editTextUserName = (EditText) findViewById(R.id.L_user);

@@ -123,9 +123,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     ft.replace(R.id.fragment_content, fg).commit();
                 }
                 break;
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                this.finish();
             case R.id.nav_message:
                 fg = new MsgFragment();
                 ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
@@ -141,6 +138,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_logout:
                 Toast.makeText(MainActivity.this, "Logout Sucessful.", Toast.LENGTH_SHORT);
                 stopService(servIntent);
+                Intent intent = new Intent(this,LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 this.finish();
             default:
                 break;
