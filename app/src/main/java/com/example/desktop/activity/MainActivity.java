@@ -88,13 +88,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SPUtil.fetchSP("Settings", this);
     }
 
+    private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
+    private long mBackPressed;
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis())
+            {
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(1);
+                return;
+            }
+            else { Toast.makeText(getBaseContext(), "Tap back button in order to exit", Toast.LENGTH_SHORT).show(); }
+
+            mBackPressed = System.currentTimeMillis();
         }
     }
 
