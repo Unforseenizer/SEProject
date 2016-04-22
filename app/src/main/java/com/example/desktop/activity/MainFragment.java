@@ -1,6 +1,5 @@
 package com.example.desktop.activity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -99,41 +98,5 @@ public class MainFragment extends Fragment implements GestureDetector.OnGestureL
         Log.e(TAG, "onDetach");
         ((MainActivity) getActivity()).unregisterMyOnTouchListener(myOnTouchListener);
         super.onDetach();
-    }
-
-    @Override
-    public void onDestroy() {
-        Log.e(TAG, "onDestroy");
-        super.onDestroy();
-    }
-
-    @Override
-    public void onDestroyView() {
-        Log.e(TAG, "onDestroyView");
-        super.onDestroyView();
-    }
-
-    @Override
-    public void onStart() {
-        Log.e(TAG, "onStart");
-        super.onStart();
-    }
-
-    @Override
-    public void onResume() {
-        Log.e(TAG, "onResume");
-        super.onResume();
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        Log.e(TAG, "onAttach");
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        Log.e(TAG, "onViewCreated");
-        super.onViewCreated(view, savedInstanceState);
     }
 }

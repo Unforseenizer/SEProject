@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.desktop.project.R;
-import com.example.desktop.project.Settings;
+import com.example.desktop.setting.Settings;
 
 public class ProfileActivity extends AppCompatActivity {
 

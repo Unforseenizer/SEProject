@@ -8,7 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.widget.Toast;
 
 import com.example.desktop.project.R;
-import com.example.desktop.project.Settings;
+import com.example.desktop.setting.Settings;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

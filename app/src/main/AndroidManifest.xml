@@ -29,7 +29,7 @@
             android:name="com.example.desktop.activity.MainActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.example.desktop.activity.SettingActivity"
+            android:name="com.example.desktop.setting.SettingActivity"
             android:label="系統設定"
             android:parentActivityName="com.example.desktop.activity.MainActivity"
             android:theme="@style/AppTheme" />

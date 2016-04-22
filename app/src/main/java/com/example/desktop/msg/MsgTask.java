@@ -13,7 +13,7 @@ import android.util.Log;
 
 import com.example.desktop.activity.MainActivity;
 import com.example.desktop.project.R;
-import com.example.desktop.project.Settings;
+import com.example.desktop.setting.Settings;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

@@ -24,7 +24,9 @@ import com.example.desktop.event.Fragment_category;
 import com.example.desktop.msg.MsgFragment;
 import com.example.desktop.msg.MsgServices;
 import com.example.desktop.project.R;
-import com.example.desktop.project.Settings;
+import com.example.desktop.setting.SPUtil;
+import com.example.desktop.setting.SettingFragment;
+import com.example.desktop.setting.Settings;
 
 import java.util.ArrayList;
 
@@ -38,21 +40,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     Fragment fg;
     FragmentTransaction ft;
+
     Intent servIntent;
     //Implement Passing Method to Fragment
     ArrayList<MyOnTouchListener> onTouchListeners = new ArrayList<>(10);
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.e(TAG, "onStart");
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
+        inflateLayout();
+        inflateFragment();
+        updateDrawer();
+        initServ();
+    }
+
+    public void inflateLayout() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -62,12 +66,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         getSupportActionBar().setTitle("Home Page");
-        updateDrawer();
+    }
 
-        servIntent = new Intent(this, MsgServices.class);
-        startService(servIntent);
+
+    public void inflateFragment() {
         ft = getSupportFragmentManager().beginTransaction();
-        inflateHome();
+        fg = new MainFragment();
+        ft.replace(R.id.fragment_content, fg).commit();
     }
 
     public void updateDrawer() {
@@ -77,9 +82,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         username.setText(Settings.USERNAME);
     }
 
-    public void inflateHome() {
-        fg = new MainFragment();
-        ft.replace(R.id.fragment_content, fg).commit();
+    public void initServ() {
+        servIntent = new Intent(this, MsgServices.class);
+        startService(servIntent);
+        SPUtil.fetchSP("Settings", this);
     }
 
     @Override
@@ -103,16 +109,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (!(fg instanceof MainFragment)) {
                     ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
                     getSupportActionBar().setTitle(TAG);
-                    inflateHome();
+                    inflateFragment();
                 }
                 break;
             case R.id.nav_main:
                 Intent intent1 = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent1);
-                break;
-            case R.id.nav_setting:
-                Intent intent5 = new Intent(MainActivity.this, SettingActivity.class);
-                startActivity(intent5);
                 break;
             case R.id.nav_eventlist:
                 if (!(fg instanceof Fragment_category)) {
@@ -121,19 +123,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     ft.replace(R.id.fragment_content, fg).commit();
                 }
                 break;
-            case R.id.nav_logout:
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                Toast.makeText(MainActivity.this, "Logout Sucessful.", Toast.LENGTH_SHORT);
-                startActivity(intent);
-                stopService(servIntent);
-                this.finish();
-                break;
             case R.id.nav_message:
                 fg = new MsgFragment();
                 ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
                 ft.replace(R.id.fragment_content, fg).commit();
                 break;
-            default:
+            case R.id.nav_setting:
+                if (!(fg instanceof SettingFragment)) {
+                    fg = new SettingFragment();
+                    ft.setCustomAnimations(R.anim.push_up_in, R.anim.push_up_out);
+                    ft.replace(R.id.fragment_content, fg).commit();
+                }
+                break;
+            case R.id.nav_logout:
+                Toast.makeText(MainActivity.this, "Logout Sucessful.", Toast.LENGTH_SHORT);
+                stopService(servIntent);
+                this.finish();
                 break;
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -171,39 +176,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void unregisterMyOnTouchListener(MyOnTouchListener myOnTouchListener) {
         onTouchListeners.remove(myOnTouchListener);
-    }
-
-    @Override
-    public void onDetachedFromWindow() {
-        Log.e(TAG, "onDetachedFromWindow");
-        if (fg != null) {
-            Log.e(TAG, fg.toString());
-        }
-        super.onDetachedFromWindow();
-    }
-
-    @Override
-    public void onDestroy() {
-        Log.e(TAG, "onDestroy");
-        super.onDestroy();
-    }
-
-    @Override
-    protected void onStop() {
-        Log.e(TAG, "onStop");
-        super.onStop();
-    }
-
-    @Override
-    protected void onPause() {
-        Log.e(TAG, "onPause");
-        super.onPause();
-    }
-
-    @Override
-    protected void onRestart() {
-        Log.e(TAG, "onRestart");
-        super.onRestart();
     }
 
     public interface MyOnTouchListener {

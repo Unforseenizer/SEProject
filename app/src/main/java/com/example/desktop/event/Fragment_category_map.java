@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.desktop.project.R;
-import com.example.desktop.project.Settings;
+import com.example.desktop.setting.Settings;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -19,9 +19,9 @@ import com.google.android.gms.maps.model.LatLng;
 public class Fragment_category_map extends Fragment implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
 
     public static SupportMapFragment mapFragment;
+    FragmentTransaction fragmentTransaction;
     private GoogleMap mMap;
     private View root;
-    FragmentTransaction fragmentTransaction;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

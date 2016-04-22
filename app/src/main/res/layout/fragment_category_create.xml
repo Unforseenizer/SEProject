@@ -57,7 +57,7 @@
 
         <TextView
             android:text="Description"
-            android:textSize="20sp" />
+            android:textSize="20sp"/>
     </TableRow>
 
     <TableRow>
@@ -68,7 +68,8 @@
             android:layout_weight="1"
 
             android:hint="Desciption"
-            android:minLines="5" />
+            android:minLines="5"
+            android:maxLines="8"/>
     </TableRow>
 
     <TableRow>

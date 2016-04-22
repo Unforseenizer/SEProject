@@ -1,6 +1,6 @@
 package com.example.desktop.event;
 
-import com.example.desktop.project.Settings;
+import com.example.desktop.setting.Settings;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;

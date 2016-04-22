@@ -16,7 +16,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.desktop.project.R;
-import com.example.desktop.project.Settings;
+import com.example.desktop.setting.Settings;
 
 public class Fragment_category_create extends Fragment implements TimePickerFragment.OnHeadlineSelectedListener, DatePickerDialog.OnDateSetListener, View.OnClickListener {
     EditText eventName, eventDescription;

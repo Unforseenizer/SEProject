@@ -24,7 +24,7 @@ import android.widget.TextView;
 
 import com.example.desktop.activity.MainActivity;
 import com.example.desktop.project.R;
-import com.example.desktop.project.Settings;
+import com.example.desktop.setting.Settings;
 
 import java.util.List;
 

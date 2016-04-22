@@ -1,4 +1,4 @@
-package com.example.desktop.project;
+package com.example.desktop.setting;
 
 import android.net.Uri;
 

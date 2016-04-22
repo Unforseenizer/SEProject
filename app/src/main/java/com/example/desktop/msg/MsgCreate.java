@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.desktop.project.R;
-import com.example.desktop.project.Settings;
+import com.example.desktop.setting.Settings;
 
 public class MsgCreate extends AppCompatActivity implements View.OnClickListener {
     Toolbar toolbar;

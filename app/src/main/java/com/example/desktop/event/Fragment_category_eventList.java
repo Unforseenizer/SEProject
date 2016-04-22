@@ -18,7 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.desktop.project.R;
-import com.example.desktop.project.Settings;
+import com.example.desktop.setting.Settings;
 
 import java.util.ArrayList;
 

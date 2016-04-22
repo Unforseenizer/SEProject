@@ -8,7 +8,7 @@ import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
 
-import com.example.desktop.project.Settings;
+import com.example.desktop.setting.Settings;
 
 public class MsgServices extends Service {
 

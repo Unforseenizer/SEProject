@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Notification Settings">
+        <CheckBoxPreference
+            android:key="notification"
+            android:defaultValue="true"
+            android:title="Enable Notification" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Debug Settings">
+        <EditTextPreference
+            android:key="ip"
+            android:title="Connect IP Address"
+            android:summary="Connect to server"
+            android:dialogTitle="Enter IP Address" />
+        <EditTextPreference
+            android:key="username"
+            android:title="User Name"
+            android:summary="Display to User"
+            android:dialogTitle="Enter User Name" />
+    </PreferenceCategory>
+</PreferenceScreen>

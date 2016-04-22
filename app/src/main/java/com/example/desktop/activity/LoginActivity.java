@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.example.desktop.project.LoginDataBaseAdapter;
 import com.example.desktop.project.R;
-import com.example.desktop.project.Settings;
+import com.example.desktop.setting.Settings;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     LoginDataBaseAdapter loginDataBaseAdapter;
@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 // check if the Stored password matches with  Password entered by user
                 if (password.equals(storedPassword) && password.length() > 0) {
                     Toast.makeText(LoginActivity.this, "Congrats: Login Successfull", Toast.LENGTH_LONG).show();
-                    if (SettingActivity.isNotification == true) {
+                    if (Settings.IS_NOTIFY == true) {
                         final int notifyID = 1; // 通知的識別號碼
                         final NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE); // 取得系統的通知服務
                         final Notification notification = new Notification.Builder(getApplicationContext()).setSmallIcon(R.drawable.ic_app).setContentTitle("Welcome !").setContentText("You're logged in !").build(); // 建立通知
