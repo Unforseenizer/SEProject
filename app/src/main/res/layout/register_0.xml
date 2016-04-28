@@ -37,13 +37,6 @@
         android:text="CANCEL"
         android:textSize="24dp" />
 
-    <ProgressBar
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:layout_gravity="right" />
-
     <Button
         android:id="@+id/r1_next"
         android:layout_width="wrap_content"
